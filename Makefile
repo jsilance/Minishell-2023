@@ -1,7 +1,7 @@
 
 NAME = minishell
 
-SRCS = main.c ft_strchr.c ft_strnstr.c \
+SRCS = main.c ft_strchr.c ft_strnstr.c arg_to_list.c \
 
 SRC = $(addprefix srcs/, $(SRCS))
 

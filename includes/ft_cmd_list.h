@@ -6,7 +6,7 @@
 /*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 16:30:41 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/05/23 20:42:35 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/05/24 19:29:57 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,31 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-typedef struct s_lst_cmd
+typedef struct s_lst_arg
 {
 	char				*content;
 	int					len;
+	struct s_lst_arg	*next;
+}						t_lst_arg;
+
+typedef struct s_lst_cmd
+{
 	struct s_lst_cmd	*next;
+	t_lst_arg			*arguments;
+	int					fd_in;
+	int					fd_out;
+	int					next_is_piped;
 }						t_lst_cmd;
 
-t_lst_cmd				*ft_list_new(char *content, int len);
-t_lst_cmd				*ft_lst_last(t_lst_cmd *lst);
-t_lst_cmd				*ft_lst_add_back(t_lst_cmd *lst, char *content,
+t_lst_arg				*ft_list_new(char *content, int len);
+t_lst_arg				*ft_lst_last(t_lst_arg *lst);
+t_lst_arg				*ft_lst_add_back(t_lst_arg *lst, char *content,
 							int len);
-t_lst_cmd				*ft_lst_clear(t_lst_cmd *cmd);
-t_lst_cmd				*ft_parsing(char *line);
+t_lst_arg				*ft_lst_clear(t_lst_arg *cmd);
+
+t_lst_cmd				*ft_cmd_list_new(t_lst_arg *arg);
+t_lst_cmd				*ft_cmd_lst_last(t_lst_cmd *lst);
+t_lst_cmd				*ft_cmd_lst_add_back(t_lst_cmd *lst, t_lst_cmd *new);
+t_lst_cmd				*ft_cmd_lst_clear(t_lst_cmd *lst);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 16:35:56 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/05/23 19:27:21 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/05/24 19:42:22 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ void	sighandler(int signum)
 
 int	main(int argc, char **argv, char **env)
 {
-	char	*line;
+	char		*line;
+	t_lst_cmd	*cmd_lst;
 
 	(void)argc;
 	(void)argv;
@@ -35,6 +36,8 @@ int	main(int argc, char **argv, char **env)
 		if (ft_strnstr(line, "exit", 4))
 			exit(0);
 		printf("%s\n", line);
+		cmd_lst = ft_parsing(line);
+		ft_cmd_lst_clear(cmd_lst);
 		free(line);
 	}
 	return (0);

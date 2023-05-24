@@ -1,11 +1,14 @@
 
 NAME = minishell
 
-SRCS = main.c ft_strchr.c ft_strnstr.c arg_to_list.c \
+SRCS = main.c \
+		ft_strchr.c ft_strnstr.c \
+		linklist/arg_to_list.c linklist/arg_list_utils.c linklist/cmd_list_utils.c \
 
 SRC = $(addprefix srcs/, $(SRCS))
 
-CFLAGS = -Wall -Wextra -Werror -I includes/ -g3
+CFLAGS = -Wall -Wextra -Werror -I includes/ -g3 -fsanitize=address
+#dont forget to remove -fsanitize=address for evaluation
 
 LDFLAGS = -lreadline
 

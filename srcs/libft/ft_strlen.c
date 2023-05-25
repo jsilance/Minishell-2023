@@ -1,31 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/23 16:36:33 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/05/25 20:39:23 by jusilanc         ###   ########.fr       */
+/*   Created: 2023/05/25 20:21:20 by jusilanc          #+#    #+#             */
+/*   Updated: 2023/05/25 20:22:23 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "minishell.h"
 
-# include "ft_cmd_list.h"
-# include "libft.h"
-
-enum		e_bool
+size_t	ft_strlen(const char *str)
 {
-	FALSE = 0,
-	TRUE
-};
+	size_t	i;
 
-t_lst_cmd	*ft_parsing(char *line);
-
-char		**ft_path_finder(char **env);
-char		*cmd_path(char *cmd, char **path);
-void		ft_multi_free(char **ptr);
-
-#endif
+	i = 0;
+	while (str && str[i])
+		i++;
+	return (i);
+}

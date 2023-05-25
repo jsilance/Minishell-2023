@@ -6,21 +6,11 @@
 /*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 17:23:24 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/05/23 17:28:36 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/05/25 20:24:40 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static size_t	ft_strlen(const char *str)
-{
-	size_t	len;
-
-	len = 0;
-	while (str && str[len])
-		len++;
-	return (len);
-}
 
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {

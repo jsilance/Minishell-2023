@@ -1,31 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/23 16:36:33 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/05/25 20:39:23 by jusilanc         ###   ########.fr       */
+/*   Created: 2023/05/25 20:28:44 by jusilanc          #+#    #+#             */
+/*   Updated: 2023/05/25 20:29:19 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "minishell.h"
 
-# include "ft_cmd_list.h"
-# include "libft.h"
-
-enum		e_bool
+void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
-	FALSE = 0,
-	TRUE
-};
+	unsigned char	*dest;
+	unsigned char	*str;
+	size_t			i;
 
-t_lst_cmd	*ft_parsing(char *line);
-
-char		**ft_path_finder(char **env);
-char		*cmd_path(char *cmd, char **path);
-void		ft_multi_free(char **ptr);
-
-#endif
+	i = -1;
+	dest = (unsigned char *)dst;
+	str = (unsigned char *)src;
+	if (!n || dest == src)
+		return (dest);
+	while (dest && str && ++i < n)
+		dest[i] = str[i];
+	return (dest);
+}

@@ -6,7 +6,7 @@
 /*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 17:33:56 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/05/24 19:29:38 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/05/25 19:50:51 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_lst_cmd	*ft_cmd_list_new(t_lst_arg *arg)
 	node->arguments = arg;
 	node->fd_in = 0;
 	node->fd_out = 1;
-	node->next_is_piped = 0;
+	node->output_type = 0;
 	node->next = NULL;
 	return (node);
 }
@@ -39,18 +39,25 @@ t_lst_cmd	*ft_cmd_lst_last(t_lst_cmd *lst)
 	return (temp);
 }
 
-t_lst_cmd	*ft_cmd_lst_add_back(t_lst_cmd *lst, t_lst_cmd *new)
+t_lst_cmd	*ft_cmd_lst_add_back(t_lst_cmd **list, t_lst_cmd *new)
 {
 	t_lst_cmd	*temp;
+	t_lst_cmd	*lst;
 
+	lst = *list;
 	if (!lst)
-		return (NULL);
+	{
+		lst = new;
+		*list = lst;
+		return (lst);
+	}
 	temp = ft_cmd_lst_last(lst);
 	if (!temp)
 		return (NULL);
 	temp->next = new;
 	if (!temp->next)
 		return (NULL);
+	*list = lst;
 	return (lst);
 }
 

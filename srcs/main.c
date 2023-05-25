@@ -6,7 +6,7 @@
 /*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 16:35:56 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/05/24 19:42:22 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/05/25 18:07:02 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int	main(int argc, char **argv, char **env)
 			exit(0);
 		printf("%s\n", line);
 		cmd_lst = ft_parsing(line);
+		ft_cmd_lst_print(cmd_lst);
 		ft_cmd_lst_clear(cmd_lst);
 		free(line);
 	}

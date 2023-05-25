@@ -6,7 +6,7 @@
 /*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 17:33:56 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/05/24 17:36:31 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/05/25 19:08:32 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ t_lst_arg	*ft_lst_last(t_lst_arg *lst)
 {
 	t_lst_arg	*temp;
 
+	if (!lst)
+		return (lst);
 	while (lst)
 	{
 		temp = lst;
@@ -37,18 +39,25 @@ t_lst_arg	*ft_lst_last(t_lst_arg *lst)
 	return (temp);
 }
 
-t_lst_arg	*ft_lst_add_back(t_lst_arg *lst, char *content, int len)
+t_lst_arg	*ft_lst_add_back(t_lst_arg **list, char *content, int len)
 {
 	t_lst_arg	*temp;
+	t_lst_arg	*lst;
 
+	lst = *list;
 	if (!lst)
-		return (NULL);
+	{
+		lst = ft_list_new(content, len);
+		*list = lst;
+		return (lst);
+	}
 	temp = ft_lst_last(lst);
 	if (!temp)
 		return (NULL);
 	temp->next = ft_list_new(content, len);
 	if (!temp->next)
 		return (NULL);
+	*list = lst;
 	return (lst);
 }
 

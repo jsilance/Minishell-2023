@@ -6,7 +6,7 @@
 /*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 17:01:47 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/05/26 15:53:32 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/05/26 19:32:48 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	ft_cmd_lst_print(t_lst_cmd *cmd, char **env)
 			// printf("[%.*s]", ptr->len, ptr->content);
 			ptr = ptr->next;
 		}
-		// printf("(%d)\n", cmd->output_type);
+		// printf("(%d)(%d)(%d)\n", cmd->fd_in, cmd->fd_out, cmd->output_type);
 		cmd = cmd->next;
 	}
 }

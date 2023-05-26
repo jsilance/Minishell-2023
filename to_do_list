@@ -1,2 +1,3 @@
-crash qd aucun arg avec echo
-crash qd aucune commande
+gere les redirection (dup2, ceation de fichier si > ou >>...)
+gestion des signaux de retour de commande
+gerer l'environnement

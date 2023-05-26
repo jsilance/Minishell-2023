@@ -6,22 +6,23 @@
 /*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 20:15:34 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/05/25 20:38:20 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/05/26 13:06:36 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_multi_free(char **ptr)
+char	**ft_multi_free(char **ptr, size_t len)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
 	if (!ptr)
-		return ;
-	while (ptr[i])
+		return (NULL);
+	while (ptr[i] && i < len)
 		free(ptr[i++]);
 	free(ptr);
+	return (NULL);
 }
 
 char	*cmd_path(char *cmd, char **path)

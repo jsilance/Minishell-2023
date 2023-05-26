@@ -1,44 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   arg_to_tab.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/25 20:26:21 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/05/26 11:57:35 by jusilanc         ###   ########.fr       */
+/*   Created: 2023/05/26 12:53:53 by jusilanc          #+#    #+#             */
+/*   Updated: 2023/05/26 13:08:55 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*ft_strdup(const char *str)
+char	**arg_to_tab(t_lst_arg *arg)
 {
-	char	*ptr;
-
-	ptr = malloc(sizeof(char) * (ft_strlen((char *)str) + 1));
-	if (!ptr)
-		return (NULL);
-	if (str)
-		ft_memcpy(ptr, (char *)str, ft_strlen((char *)str));
-	ptr[ft_strlen((char *)str)] = 0;
-	return (ptr);
-}
-
-char	*ft_strndup(const char *str, int len)
-{
-	char	*ptr;
-	int		i;
+	size_t	len;
+	size_t	i;
+	char	**tab;
 
 	i = 0;
-	ptr = malloc(sizeof(char) * (len + 1));
-	if (!ptr)
+	len = ft_lst_size(arg);
+	tab = (char **)malloc(sizeof(char *) * (len + 1));
+	if (!tab)
 		return (NULL);
-	while (str && str[i] && len--)
+	while (len > i && arg)
 	{
-		ptr[i] = str[i];
+		tab[i] = ft_strndup(arg->content, arg->len);
+		if (!tab[i])
+			return (ft_multi_free(tab, i));
+		arg = arg->next;
 		i++;
 	}
-	ptr[i] = 0;
-	return (ptr);
+	tab[i] = NULL;
+	return (tab);
 }

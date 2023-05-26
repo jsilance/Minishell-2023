@@ -1,11 +1,12 @@
 
 NAME = minishell
 
-SRCS = main.c \
+SRCS = main.c path_finder.c \
 
 LIBFT = ft_strchr.c ft_strnstr.c ft_memcpy.c ft_strdup.c ft_strlen.c ft_strtrim.c ft_substr.c \
+		ft_split.c ft_strjoin.c \
 
-LLIST = arg_to_list.c arg_list_utils.c cmd_list_utils.c \
+LLIST = arg_to_list.c arg_list_utils.c cmd_list_utils.c arg_to_tab.c \
 
 SRC = $(addprefix srcs/, $(SRCS))
 SRC_LIBFT = $(addprefix srcs/libft/, $(LIBFT))
@@ -31,7 +32,7 @@ all: ${NAME}
 		@cc ${CFLAGS} -c $< -o ${<:.c=.o}
 
 clean:
-		@rm -rf ${OBJ} ${OBJ_LIBFT}
+		@rm -rf ${ALL_OBJ}
 
 fclean: clean
 		@rm -rf ${NAME}

@@ -6,7 +6,7 @@
 /*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 16:30:41 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/05/25 19:51:21 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/05/26 13:09:09 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,14 @@ t_lst_arg				*ft_lst_last(t_lst_arg *lst);
 t_lst_arg				*ft_lst_add_back(t_lst_arg **lst, char *content,
 							int len);
 t_lst_arg				*ft_lst_clear(t_lst_arg *cmd);
+size_t					ft_lst_size(t_lst_arg *lst);
 
 t_lst_cmd				*ft_cmd_list_new(t_lst_arg *arg);
 t_lst_cmd				*ft_cmd_lst_last(t_lst_cmd *lst);
 t_lst_cmd				*ft_cmd_lst_add_back(t_lst_cmd **lst, t_lst_cmd *new);
 t_lst_cmd				*ft_cmd_lst_clear(t_lst_cmd *lst);
 
-void					ft_cmd_lst_print(t_lst_cmd *cmd);
+void					ft_cmd_lst_print(t_lst_cmd *cmd, char **env);
+char					**arg_to_tab(t_lst_arg *arg);
 
 #endif

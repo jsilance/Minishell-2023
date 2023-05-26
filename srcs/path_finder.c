@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path_finder.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jusilanc <jusilanc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 20:15:34 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/05/26 14:23:01 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/05/26 22:28:21 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,19 @@ char	**ft_multi_free(char **ptr, size_t len)
 	if (!ptr)
 		return (NULL);
 	while (ptr[i] && i < len)
+		free(ptr[i++]);
+	free(ptr);
+	return (NULL);
+}
+
+char	**ft_tab_free(char **ptr)
+{
+	size_t	i;
+
+	i = 0;
+	if (!ptr)
+		return (NULL);
+	while (ptr[i])
 		free(ptr[i++]);
 	free(ptr);
 	return (NULL);

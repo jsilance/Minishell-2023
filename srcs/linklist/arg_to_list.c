@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   arg_to_list.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jusilanc <jusilanc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 17:01:47 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/05/26 19:32:48 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/05/26 23:12:07 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,12 @@ void	ft_cmd_lst_print(t_lst_cmd *cmd, char **env)
 		{
 			if (first == TRUE)
 			{
-				if (!ft_strncmp(ptr->content, "echo", 4))
-					ft_echo(ptr);
+				if (!ft_strncmp(ptr->content, "echo", ptr->len))
+					ft_echo(ptr, env);
+				else if (!ft_strncmp(ptr->content, "unset", ptr->len))
+				{
+					ft_tab_delone(env, ptr->next->content);
+				}
 				else
 				{
 					cmd_str = ft_strndup(ptr->content, ptr->len);

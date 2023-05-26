@@ -4,7 +4,7 @@ NAME = minishell
 SRCS = main.c path_finder.c parsing.c ft_pipe.c\
 
 LIBFT = ft_strchr.c ft_strnstr.c ft_memcpy.c ft_strdup.c ft_strlen.c ft_strtrim.c ft_substr.c \
-		ft_split.c ft_strjoin.c ft_strncmp.c \
+		ft_split.c ft_strjoin.c ft_strncmp.c ft_tabdup.c \
 
 LLIST = arg_to_list.c arg_list_utils.c cmd_list_utils.c arg_to_tab.c \
 

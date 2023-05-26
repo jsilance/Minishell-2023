@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jusilanc <jusilanc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 20:22:58 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/05/26 13:54:43 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/05/26 22:56:43 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,10 @@ char	**ft_split(char const *s, char c);
 char	*ft_strnstock(char const *s1, char const *s2, int n, int param);
 char	*ft_strndup(const char *str, int len);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
+
+char	**ft_tabdup(char **tab);
+char	*ft_var_finder(char **env, char *variable);
+char	**ft_tab_apped(char **old_env, char *new_str);
+char	**ft_tab_delone(char **old_env, char *del_str);
 
 #endif

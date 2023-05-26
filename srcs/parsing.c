@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: avancoll <avancoll@student.s19.be>         +#+  +:+       +#+        */
+/*   By: jusilanc <jusilanc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 14:28:48 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/05/26 18:41:48 by avancoll         ###   ########.fr       */
+/*   Updated: 2023/05/26 23:24:10 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,8 @@ t_lst_cmd	*ft_parsing(char *line)
 		cmd->output_type = output_type_selector(&line[i]);
 		if (cmd->output_type == 4)
 			i++;
-		i++;
+		// i++;
+		printf("/%d/\n", i);
 	}
 	return (cmd_lst);
 }

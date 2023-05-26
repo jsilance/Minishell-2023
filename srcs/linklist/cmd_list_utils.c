@@ -6,7 +6,7 @@
 /*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 17:33:56 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/05/25 19:50:51 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/05/26 13:34:59 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,10 @@ t_lst_cmd	*ft_cmd_lst_clear(t_lst_cmd *lst)
 	while (lst)
 	{
 		temp = lst->next;
+		if (lst->fd_in != 0)
+			close(lst->fd_in);
+		if (lst->fd_out != 1)
+			close(lst->fd_in);
 		ft_lst_clear(lst->arguments);
 		free(lst);
 		lst = temp;

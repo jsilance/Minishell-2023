@@ -6,7 +6,7 @@
 /*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 20:22:58 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/05/26 11:57:51 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/05/26 13:54:43 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,6 @@ char	*ft_strjoin(char const *s1, char const *s2);
 char	**ft_split(char const *s, char c);
 char	*ft_strnstock(char const *s1, char const *s2, int n, int param);
 char	*ft_strndup(const char *str, int len);
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
 
 #endif

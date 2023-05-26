@@ -1,32 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/23 16:36:33 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/05/26 13:50:16 by jusilanc         ###   ########.fr       */
+/*   Created: 2023/05/26 13:52:56 by jusilanc          #+#    #+#             */
+/*   Updated: 2023/05/26 13:54:27 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "minishell.h"
 
-# include "ft_cmd_list.h"
-# include "ft_programs.h"
-# include "libft.h"
-
-enum		e_bool
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	FALSE = 0,
-	TRUE
-};
+	size_t	count;
 
-t_lst_cmd	*ft_parsing(char *line);
-
-char		**ft_path_finder(char **env);
-char		*cmd_path(char *cmd, char **path);
-char		**ft_multi_free(char **ptr, size_t len);
-
-#endif
+	count = 0;
+	while (s1 && s2 && n-- && (s1[count] || s2[count]))
+	{
+		if ((unsigned char)s1[count] != (unsigned char)s2[count])
+			return ((unsigned char)s1[count] - (unsigned char)s2[count]);
+		count++;
+	}
+	return (0);
+}

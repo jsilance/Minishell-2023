@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: avancoll <avancoll@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 13:39:43 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/05/26 15:26:14 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/05/26 18:33:37 by avancoll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	ft_echo(t_lst_arg *arg)
 		return (-1);
 	else
 		arg = arg->next;
-	if (!ft_strncmp(arg->content, "-n", arg->len))
+	if (arg && !ft_strncmp(arg->content, "-n", arg->len))
 	{
 		no_newline = 1;
 		arg = arg->next;

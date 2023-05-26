@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: avancoll <avancoll@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 16:36:33 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/05/26 13:50:16 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/05/26 17:26:51 by avancoll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,6 @@ t_lst_cmd	*ft_parsing(char *line);
 char		**ft_path_finder(char **env);
 char		*cmd_path(char *cmd, char **path);
 char		**ft_multi_free(char **ptr, size_t len);
+int			ft_pipe(t_lst_cmd *cmd);
 
 #endif

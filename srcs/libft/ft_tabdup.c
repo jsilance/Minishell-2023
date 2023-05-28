@@ -6,7 +6,7 @@
 /*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 21:40:35 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/05/28 20:09:43 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/05/28 20:17:09 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,11 +104,9 @@ char	**ft_tab_delone(char **old_env, char *del_str)
 
 	j = 0;
 	size = 0;
-	if (!old_env)
-		return (NULL);
 	while (old_env && old_env[size])
 		size++;
-	new_env = (char **)malloc(sizeof(char *) * (size + 1));
+	new_env = (char **)malloc(sizeof(char *) * (size));
 	if (!new_env)
 		return (NULL);
 	size = 0;

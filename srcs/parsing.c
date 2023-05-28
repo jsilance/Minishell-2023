@@ -3,23 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jusilanc <jusilanc@student.s19.be>         +#+  +:+       +#+        */
+/*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 14:28:48 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/05/26 23:24:10 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/05/28 20:03:27 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// static void	string_delimeter(char *line, int *i, int *len)
-// {
-// 	if (line[*i] && line[*i] == '"')
-// 	{
-// 		while (line[*i + *len] != '"')
-// 			(*len)++;
-// 	}
-// }
+static void	string_delimiter(char *line, int *i, int *len)
+{
+	if (line[*i] && line[*i] == '"')
+	{
+		while (line[*i + *len] != '"')
+			(*len)++;
+	}
+}
 
 static void	skip_whitespace(char *line, int *i)
 {
@@ -86,6 +86,10 @@ t_lst_cmd	*ft_parsing(char *line)
 		{
 			len = 0;
 			skip_whitespace(line, &i);
+			if (line[i] == '"')
+			{
+				string_delimiter(line, &i, &len);
+			}
 			word_delimeter(line, &i, &len);
 			if (line[i] == '|')
 				break ;
@@ -101,7 +105,7 @@ t_lst_cmd	*ft_parsing(char *line)
 		if (cmd->output_type == 4)
 			i++;
 		// i++;
-		printf("/%d/\n", i);
+		// printf("/%d/\n", i);
 	}
 	return (cmd_lst);
 }

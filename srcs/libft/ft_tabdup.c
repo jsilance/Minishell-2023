@@ -3,14 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   ft_tabdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jusilanc <jusilanc@student.s19.be>         +#+  +:+       +#+        */
+/*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 21:40:35 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/05/26 23:17:17 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/05/28 20:09:43 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static size_t	ft_len_until_equal(const char *str)
+{
+	size_t	size;
+
+	size = 0;
+	while (str[size] && str[size] != '=')
+		size++;
+	return (size);
+}
+
+static size_t	ft_len_to_compare(const char *str_env, const char *variable)
+{
+	size_t	str_env_len;
+	size_t	variable_len;
+
+	str_env_len = ft_len_until_equal(str_env);
+	variable_len = ft_len_until_equal(variable);
+	if (str_env_len < variable_len)
+		return (variable_len);
+	return (str_env_len);
+}
 
 char	**ft_tabdup(char **tab)
 {
@@ -42,14 +64,14 @@ char	*ft_tab_finder(char **env, char *variable)
 	i = 0;
 	while (env && env[i])
 	{
-		if (ft_strncmp(env[i], variable, ft_strlen(variable)))
+		if (!ft_strncmp(env[i], variable, ft_len_to_compare(env[i], variable)))
 			return (env[i]);
 		i++;
 	}
 	return (NULL);
 }
 
-char	**ft_tab_apped(char **old_env, char *new_str)
+char	**ft_tab_append(char **old_env, char *new_str)
 {
 	size_t	size;
 	char	**new_env;
@@ -60,7 +82,7 @@ char	**ft_tab_apped(char **old_env, char *new_str)
 	while (old_env && old_env[size])
 		size++;
 	new_env = (char **)malloc(sizeof(char *) * (size + 2));
-	if (new_env)
+	if (!new_env)
 		return (NULL);
 	size = 0;
 	while (old_env[size])
@@ -86,17 +108,20 @@ char	**ft_tab_delone(char **old_env, char *del_str)
 		return (NULL);
 	while (old_env && old_env[size])
 		size++;
-	new_env = (char **)malloc(sizeof(char *) * (size));
-	if (new_env)
+	new_env = (char **)malloc(sizeof(char *) * (size + 1));
+	if (!new_env)
 		return (NULL);
 	size = 0;
 	while (old_env[size])
 	{
-		if (ft_strncmp(old_env[size], del_str, ft_strlen(del_str)))
+		if (ft_strncmp(old_env[size], del_str, ft_len_to_compare(old_env[size],
+					del_str)))
 			new_env[j++] = old_env[size];
+		else
+			free(old_env[size]);
 		size++;
 	}
-	new_env[size] = 0;
+	new_env[j] = 0;
 	free(old_env);
 	return (new_env);
 }

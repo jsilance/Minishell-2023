@@ -8,7 +8,7 @@ LIBFT = ft_strchr.c ft_strnstr.c ft_memcpy.c ft_strdup.c ft_strlen.c ft_strtrim.
 
 LLIST = arg_to_list.c arg_list_utils.c cmd_list_utils.c arg_to_tab.c \
 
-BASE_PROG = echo.c \
+BASE_PROG = ft_execute.c echo.c ft_unset.c ft_export.c ft_env.c \
 
 SRC = $(addprefix srcs/, $(SRCS))
 SRC_LIBFT = $(addprefix srcs/libft/, $(LIBFT))

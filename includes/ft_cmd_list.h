@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cmd_list.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: avancoll <avancoll@student.s19.be>         +#+  +:+       +#+        */
+/*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 16:30:41 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/05/26 16:43:32 by avancoll         ###   ########.fr       */
+/*   Updated: 2023/05/28 16:18:42 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_CMD_LIST_H
 # define FT_CMD_LIST_H
 
+# include <fcntl.h>
 # include <readline/history.h>
 # include <readline/readline.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include <fcntl.h>
 
 enum					e_output_type
 {
@@ -55,7 +55,7 @@ t_lst_cmd				*ft_cmd_lst_last(t_lst_cmd *lst);
 t_lst_cmd				*ft_cmd_lst_add_back(t_lst_cmd **lst, t_lst_cmd *new);
 t_lst_cmd				*ft_cmd_lst_clear(t_lst_cmd *lst);
 
-void					ft_cmd_lst_print(t_lst_cmd *cmd, char **env);
+void					ft_cmd_lst_print(t_lst_cmd *cmd, char ***env);
 char					**arg_to_tab(t_lst_arg *arg);
 
 #endif

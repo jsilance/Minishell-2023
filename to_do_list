@@ -2,3 +2,4 @@ gere les redirection (dup2, ceation de fichier si > ou >>...)
 gestion des signaux de retour de commande
 gerer l'environnement	-> (fonction append et delone terminee)(not working yet)
 						-> creer programme export et unset
+gestion de toutes les erreures type malloc

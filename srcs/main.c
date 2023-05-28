@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jusilanc <jusilanc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 16:35:56 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/05/28 19:11:28 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/05/29 01:24:22 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,33 +35,33 @@ void	sighandler(int signum)
 
 int	main(int argc, char **argv, char **env)
 {
-	char		*line;
-	t_lst_cmd	*cmd_lst;
-	char		**cpy_env;
+	t_base	base_var;
 
 	(void)argc;
 	(void)argv;
 	signal(SIGINT, sighandler);
-	cpy_env = ft_tabdup(env);
+	base_var.env_cpy = ft_tabdup(env);
 	while (1)
 	{
-		line = readline("\033[0;36m$\033[0;32m ->\033[0m ");
-		if (!line)
-			ft_error("readline", 1, line, NULL, cpy_env);
-		add_history(line);
-		if (line && !ft_strncmp(line, "exit", 4))
-			ft_error(NULL, 0, line, NULL, cpy_env);
-		cmd_lst = ft_parsing(line);
-		if (ft_pipe(cmd_lst) == -1)
-			ft_error("ft_pipe", 2, line, cmd_lst, cpy_env);
-		if (!cpy_env)
-			ft_error("ft_tabdup", 3, line, cmd_lst, cpy_env);
-		ft_cmd_lst_execute(cmd_lst, &cpy_env);
-		ft_cmd_lst_clear(cmd_lst);
-		free(line);
-		line = NULL;
+		base_var.line = readline("\033[0;36m$\033[0;32m ->\033[0m ");
+		if (!base_var.line)
+			ft_error("readline", 1, base_var.line, NULL, base_var.env_cpy);
+		add_history(base_var.line);
+		if (base_var.line && !ft_strncmp(base_var.line, "exit", 4))
+			ft_error(NULL, 0, base_var.line, NULL, base_var.env_cpy);
+		base_var.cmd_lst = ft_parsing(base_var.line);
+		if (ft_pipe(base_var.cmd_lst) == -1)
+			ft_error("ft_pipe", 2, base_var.line, base_var.cmd_lst,
+					base_var.env_cpy);
+		if (!base_var.env_cpy)
+			ft_error("ft_tabdup", 3, base_var.line, base_var.cmd_lst,
+					base_var.env_cpy);
+		ft_cmd_lst_execute(base_var.cmd_lst, &base_var.env_cpy);
+		ft_cmd_lst_clear(base_var.cmd_lst);
+		free(base_var.line);
+		base_var.line = NULL;
 	}
-	// ft_tab_free(cpy_env);
-	// ft_error doit free cpy_env
+	// ft_tab_free(base_var.env_cpy);
+	// ft_error doit free base_var.env_cpy
 	return (0);
 }

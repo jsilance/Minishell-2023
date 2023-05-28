@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cmd_list.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jusilanc <jusilanc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 16:30:41 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/05/28 16:18:42 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/05/29 01:26:11 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ t_lst_cmd				*ft_cmd_lst_last(t_lst_cmd *lst);
 t_lst_cmd				*ft_cmd_lst_add_back(t_lst_cmd **lst, t_lst_cmd *new);
 t_lst_cmd				*ft_cmd_lst_clear(t_lst_cmd *lst);
 
-void					ft_cmd_lst_print(t_lst_cmd *cmd, char ***env);
+void					ft_cmd_lst_print(t_lst_cmd *cmd);
 char					**arg_to_tab(t_lst_arg *arg);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jusilanc <jusilanc@student.s19.be>         +#+  +:+       +#+        */
+/*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 16:35:56 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/05/29 01:24:22 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/05/29 16:24:04 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int	main(int argc, char **argv, char **env)
 			ft_error("ft_tabdup", 3, base_var.line, base_var.cmd_lst,
 					base_var.env_cpy);
 		ft_cmd_lst_execute(base_var.cmd_lst, &base_var.env_cpy);
+		// ft_cmd_lst_print(base_var.cmd_lst);
 		ft_cmd_lst_clear(base_var.cmd_lst);
 		free(base_var.line);
 		base_var.line = NULL;

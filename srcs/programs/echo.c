@@ -6,7 +6,7 @@
 /*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 13:39:43 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/05/28 19:21:51 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/05/29 14:56:01 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,11 @@ int	ft_echo(t_lst_arg *arg, char **env)
 	}
 	while (arg)
 	{
-		printf("%.*s", arg->len, arg->content);
-		arg = arg->next;
 		if (arg && !(ft_strchr("\"", arg->content[-1]) && !ft_strchr(" ",
 					arg->content[-2])))
 			printf(" ");
+		printf("%.*s", arg->len, arg->content);
+		arg = arg->next;
 	}
 	if (!no_newline)
 		printf("\n");

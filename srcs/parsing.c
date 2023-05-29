@@ -6,20 +6,11 @@
 /*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 14:28:48 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/05/28 20:03:27 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/05/29 16:19:21 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static void	string_delimiter(char *line, int *i, int *len)
-{
-	if (line[*i] && line[*i] == '"')
-	{
-		while (line[*i + *len] != '"')
-			(*len)++;
-	}
-}
 
 static void	skip_whitespace(char *line, int *i)
 {
@@ -28,16 +19,24 @@ static void	skip_whitespace(char *line, int *i)
 }
 void	word_delimeter(char *line, int *i, int *len)
 {
-	if (line[*i] && line[*i] == '"')
+	while (line[*i + *len] && !ft_strchr(" ;|><\n", line[*i + *len]))
 	{
-		(*i)++;
-		while (line[*i + *len] && line[*i + *len] != '"')
+		if (line[*i + *len] == '\"')
+		{
 			(*len)++;
-		return ;
-	}
-	while (line[*i + *len] && !ft_strchr(" ;|><\"\n", line[*i + *len]))
-	{
-		(*len)++;
+			while (line[*i + *len] && line[*i + *len] != '\"')
+				(*len)++;
+			(*len)++;
+		}
+		else if (line[*i + *len] == '\'')
+		{
+			(*len)++;
+			while (line[*i + *len] && line[*i + *len] != '\'')
+				(*len)++;
+			(*len)++;
+		}
+		else if (line[*i + *len])
+			(*len)++;
 	}
 	if (*len == 0)
 		while (line[*i + *len] && ft_strchr(">", line[*i + *len]))
@@ -45,12 +44,6 @@ void	word_delimeter(char *line, int *i, int *len)
 	if (*len == 0)
 		while (line[*i + *len] && ft_strchr("<", line[*i + *len]))
 			(*len)++;
-	if (*len == 0 && line[*i + *len] && line[*i + *len] == '$')
-	{
-		(*len)++;
-		while (line[*i + *len] && !ft_strchr(" ;|><", line[*i + *len]))
-			(*len)++;
-	}
 }
 
 static int	output_type_selector(char *line)
@@ -65,8 +58,6 @@ static int	output_type_selector(char *line)
 		return (OVERWRITE);
 	return (-1);
 }
-
-// char *word_to_arg()
 
 t_lst_cmd	*ft_parsing(char *line)
 {
@@ -86,10 +77,6 @@ t_lst_cmd	*ft_parsing(char *line)
 		{
 			len = 0;
 			skip_whitespace(line, &i);
-			if (line[i] == '"')
-			{
-				string_delimiter(line, &i, &len);
-			}
 			word_delimeter(line, &i, &len);
 			if (line[i] == '|')
 				break ;
@@ -104,8 +91,8 @@ t_lst_cmd	*ft_parsing(char *line)
 		cmd->output_type = output_type_selector(&line[i]);
 		if (cmd->output_type == 4)
 			i++;
-		// i++;
-		// printf("/%d/\n", i);
+		i++;
+		// printf("/%c/\n", line[i]);
 	}
 	return (cmd_lst);
 }

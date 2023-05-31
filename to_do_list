@@ -4,3 +4,6 @@ gerer l'environnement	-> (fonction append et delone terminee)(not working yet)
 						-> creer programme export et unset
 gestion de toutes les erreures type malloc
 quand modif de directory (cd) -> pwd et oldpwd sont affecte
+
+
+echo -nnnnn doit fonctionner, echo -n -n -n aussi

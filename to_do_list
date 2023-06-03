@@ -1,9 +1,29 @@
-gere les redirection (dup2, ceation de fichier si > ou >>...)
-gestion des signaux de retour de commande
-gerer l'environnement	-> (fonction append et delone terminee)(not working yet)
-						-> creer programme export et unset
+/!\ gerer les redirection (dup2, ceation de fichier si > ou >>...)
+/!\ gerer les pipes
+
+/!\ gere $?
+
+/!\ gestion des signaux de retour de commande
+
+/!\ verifier le bon fonctionnement de ctrl-C ctrl-D ctrl-\
+
+/!\ bien refaire builtin exit
+/!\ commencer builtin pwd
+/!\ commencer builtin cd
+quand modif de directory (cd) -> pwd et oldpwd sont affecte -> plus complexe que prevu
+
+
 gestion de toutes les erreures type malloc
-quand modif de directory (cd) -> pwd et oldpwd sont affecte
 
 
-echo "-n" "bonjour" doit fonctionner
+
+echo $(pwd) devrait fonctionner -> mais prions que ca passe sans qu'on le fasse
+
+export patate="-n"
+echo $patate hello -> devrait fonctionner -> mais prions que ca passe sans qu'on le fasse
+
+
+
+
+
+variable d'environnement full fonctionnel avec: execve, unset, export, echo

@@ -1,28 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_programs.h                                      :+:      :+:    :+:   */
+/*   ft_len_until_equal.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jusilanc <jusilanc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/26 13:48:18 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/03 20:38:12 by jusilanc         ###   ########.fr       */
+/*   Created: 2023/06/03 21:55:56 by jusilanc          #+#    #+#             */
+/*   Updated: 2023/06/03 21:56:03 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PROGRAMS_H
-# define FT_PROGRAMS_H
+#include "minishell.h"
 
-# include "minishell.h"
+size_t	ft_len_until_equal(const char *str)
+{
+	size_t	size;
 
-void	ft_cmd_lst_execute(t_lst_cmd *cmd, char ***env);
-
-int		ft_echo(t_lst_arg *arg, char **env);
-char	**ft_export(t_lst_arg *arg, char **env);
-char	**ft_unset(t_lst_arg *arg, char **env);
-int		ft_env(char **env);
-
-char	*var_to_str(char *str, char **env, size_t *i);
-char	*ft_str_var_process(char *arg, char **env);
-
-#endif
+	size = 0;
+	while (str && str[size] && str[size] != '=')
+		size++;
+	return (size);
+}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_execute.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jusilanc <jusilanc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 18:48:21 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/05/28 19:24:31 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/06/03 21:13:27 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static int	command_selector(t_lst_arg *ptr, char ***env)
 		if (!path_cmd)
 			printf("minishell: %s: %s\n", cmd_str, "command not found");
 		else
-			ft_execute(path_cmd, arg_to_tab(ptr), *env);
+			ft_execute(path_cmd, arg_to_tab(ptr, *env), *env);
 		free(cmd_str);
 		free(path_cmd);
 	}

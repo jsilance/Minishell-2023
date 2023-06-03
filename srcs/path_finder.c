@@ -6,7 +6,7 @@
 /*   By: jusilanc <jusilanc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 20:15:34 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/05/26 22:28:21 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/06/04 01:03:24 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ char	*cmd_path(char *cmd, char **path)
 	int		ret;
 	char	*ptr;
 
-	ret = 0;
 	i = 0;
 	ret = access(cmd, X_OK);
+	ptr = NULL;
 	if (ret == 0)
 		return (cmd);
 	while (path && path[i])
@@ -59,9 +59,12 @@ char	*cmd_path(char *cmd, char **path)
 			return (NULL);
 		ret = access(ptr, X_OK);
 		if (ret == 0)
-			return (ptr);
+			break ;
+		free(ptr);
+		ptr = NULL;
 	}
-	return (NULL);
+	ft_tab_free(path);
+	return (ptr);
 }
 
 char	**ft_path_finder(char **env)

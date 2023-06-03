@@ -3,24 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_tabdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jusilanc <jusilanc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 21:40:35 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/03 16:49:52 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/06/03 22:11:18 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-size_t	ft_len_until_equal(const char *str)
-{
-	size_t	size;
-
-	size = 0;
-	while (str[size] && str[size] != '=')
-		size++;
-	return (size);
-}
 
 static size_t	ft_len_to_compare(const char *str_env, const char *variable)
 {

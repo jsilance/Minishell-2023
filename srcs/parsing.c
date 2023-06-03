@@ -6,7 +6,7 @@
 /*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 14:28:48 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/05/29 16:19:21 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/06/03 11:59:06 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ static int	output_type_selector(char *line)
 		return (OVERWRITE);
 	return (-1);
 }
-
 t_lst_cmd	*ft_parsing(char *line)
 {
 	int			i;

@@ -6,7 +6,7 @@
 /*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 20:22:58 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/05/28 19:31:37 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/06/03 16:49:58 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,6 @@ char	**ft_tab_append(char **old_env, char *new_str);
 char	**ft_tab_delone(char **old_env, char *del_str);
 
 char	*ft_strnchr(const char *s, int c, int len);
+size_t	ft_len_until_equal(const char *str);
 
 #endif

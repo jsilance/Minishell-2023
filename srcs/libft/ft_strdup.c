@@ -6,7 +6,7 @@
 /*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 20:26:21 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/05/26 11:57:35 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/06/03 16:53:29 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ char	*ft_strndup(const char *str, int len)
 	int		i;
 
 	i = 0;
+	if (len < 0)
+		len = ft_strlen((char *)str);
 	ptr = malloc(sizeof(char) * (len + 1));
 	if (!ptr)
 		return (NULL);

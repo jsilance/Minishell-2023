@@ -6,13 +6,13 @@
 /*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 21:40:35 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/05/28 20:17:09 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/06/03 16:49:52 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static size_t	ft_len_until_equal(const char *str)
+size_t	ft_len_until_equal(const char *str)
 {
 	size_t	size;
 

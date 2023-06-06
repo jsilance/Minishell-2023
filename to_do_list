@@ -9,11 +9,11 @@
 
 gestion de toutes les erreures type malloc
 
-echo $(pwd) devrait fonctionner -> mais prions que ca passe sans qu'on le fasse
 
 export patate="-n"
 echo $patate hello -> devrait fonctionner -> mais prions que ca passe sans qu'on le fasse
 
+echo $(pwd) devrait fonctionner -> mais prions que ca passe sans qu'on le fasse
 
 readline pose possiblement probleme a cause des couleurs
 
@@ -21,6 +21,5 @@ dans echo si '$ARG' sans espace avant -> fonctionne pas
 
 
 ------------------------------jusilanc----------------------------------
-export sans ARG agit comme env mais dans lordre alphabetique
 /!\ commencer builtin pwd
 /!\ gere $?

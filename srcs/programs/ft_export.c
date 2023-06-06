@@ -3,14 +3,52 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jusilanc <jusilanc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 15:13:27 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/06 19:27:27 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/06/07 01:13:49 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	ft_swap(char **a, char **b)
+{
+	char	*tmp;
+
+	tmp = *a;
+	*a = *b;
+	*b = tmp;
+}
+
+void	ft_sort_char_tab(char **tab, int size)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < size)
+	{
+		j = i + 1;
+		while (j < size)
+		{
+			if (ft_strncmp(tab[i], tab[j], ft_strlen(tab[i])) > 0)
+				ft_swap(&tab[i], &tab[j]);
+			j++;
+		}
+		i++;
+	}
+}
+
+static size_t	ft_tab_len(char **tab)
+{
+	size_t	size;
+
+	size = 0;
+	while (tab && tab[size])
+		size++;
+	return (size);
+}
 
 static int	is_var_exist(char **env, const char *var)
 {
@@ -29,11 +67,21 @@ char	**ft_export(t_lst_arg *arg, char **env)
 {
 	char	*temp;
 	char	*str;
+	char	**env_cpy;
 
-	if (ft_strncmp(arg->content, "export", 7) != 32)
+	env_cpy = NULL;
+	if (ft_strncmp(arg->content, "export", arg->len))
 		return (env);
 	else
 		arg = arg->next;
+	if (!arg)
+	{
+		env_cpy = ft_tabdup(env);
+		ft_sort_char_tab(env_cpy, ft_tab_len(env_cpy));
+		env_cpy = ft_tab_delone(env_cpy, "_=");
+		ft_env(env_cpy);
+		ft_tab_free(env_cpy);
+	}
 	while (arg)
 	{
 		if (ft_strnchr(arg->content, '=', arg->len))

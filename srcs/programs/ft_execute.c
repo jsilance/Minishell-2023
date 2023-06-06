@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_execute.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jusilanc <jusilanc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 18:48:21 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/06 21:14:47 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/06/07 00:53:34 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,15 +38,15 @@ static int	command_selector(t_lst_arg *ptr, char ***env)
 	char	*path_cmd;
 	char	*cmd_str;
 
-	if (ft_strncmp(ptr->content, "echo", 5) == 32)
+	if (!ft_strncmp(ptr->content, "echo", ptr->len))
 		ft_echo(ptr, *env);
 	else if (!ft_strncmp(ptr->content, "cd", ptr->len))
 		*env = ft_cd(ptr, *env);
-	else if (ft_strncmp(ptr->content, "unset", 6) == 32)
+	else if (!ft_strncmp(ptr->content, "unset", ptr->len))
 		*env = ft_unset(ptr, *env);
-	else if (ft_strncmp(ptr->content, "export", 7) == 32)
+	else if (!ft_strncmp(ptr->content, "export", ptr->len))
 		*env = ft_export(ptr, *env);
-	else if (ft_strncmp(ptr->content, "env", 4) == 32)
+	else if (!ft_strncmp(ptr->content, "env", ptr->len))
 		ft_env(*env);
 	else
 	{

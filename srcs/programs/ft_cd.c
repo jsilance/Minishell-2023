@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jusilanc <jusilanc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 16:20:25 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/06 21:20:03 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/06/07 00:51:29 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ char	**ft_cd(t_lst_arg *arg, char **env)
 	}
 	else
 	{
-		0 ft_lst_add_back(&arg, "$HOME", 5);
+		ft_lst_add_back(&arg, "$HOME", 5);
 		env = ft_cd(arg, env);
 	}
 	return (env);

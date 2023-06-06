@@ -6,7 +6,7 @@
 /*   By: avancoll <avancoll@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 16:35:56 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/05 18:10:08 by avancoll         ###   ########.fr       */
+/*   Updated: 2023/06/06 15:26:57 by avancoll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,18 @@ int	main(int argc, char **argv, char **env)
 
 	(void)argc;
 	(void)argv;
-	signal(SIGINT, sig_handler);
-	signal(SIGQUIT, sig_handler);
+	all_signal();
 	base_var.env_cpy = ft_tabdup(env);
 	while (1)
 	{
 		base_var.line = readline("minishell$ "); //("\033[0;36m$\033[0;32m ->\033[0m ")
 		if (!base_var.line)
 			ft_error(1, base_var.line, NULL, base_var.env_cpy);
+		if (base_var.line == NULL)
+		{
+			printf("exit\n");
+			exit(0);
+		}
 		add_history(base_var.line);
 		if (base_var.line && !ft_strncmp(base_var.line, "exit", 4))
 			ft_error(0, base_var.line, NULL, base_var.env_cpy);

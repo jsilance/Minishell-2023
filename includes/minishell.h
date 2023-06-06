@@ -6,7 +6,7 @@
 /*   By: avancoll <avancoll@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 16:36:33 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/05 16:10:31 by avancoll         ###   ########.fr       */
+/*   Updated: 2023/06/06 15:27:20 by avancoll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,6 @@ char			**ft_tab_free(char **ptr);
 
 int				ft_pipe(t_lst_cmd *cmd);
 void			sig_handler(int signum);
+void			all_signal(void);
 
 #endif

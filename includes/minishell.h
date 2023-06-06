@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: avancoll <avancoll@student.s19.be>         +#+  +:+       +#+        */
+/*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 16:36:33 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/06 15:27:20 by avancoll         ###   ########.fr       */
+/*   Updated: 2023/06/06 18:00:51 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <signal.h>
 # include <sys/types.h>
 # include <sys/wait.h>
+# include <termios.h>
 
 enum			e_bool
 {
@@ -42,7 +43,7 @@ char			**ft_multi_free(char **ptr, size_t len);
 char			**ft_tab_free(char **ptr);
 
 int				ft_pipe(t_lst_cmd *cmd);
-void			sig_handler(int signum);
-void			all_signal(void);
+void			sig_handler(int process);
+void			rl_replace_line(const char *text, int clear_undo);
 
 #endif

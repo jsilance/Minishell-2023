@@ -6,7 +6,7 @@
 /*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 11:41:22 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/03 15:46:47 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/06/06 20:36:43 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,22 @@ char	*ft_strnstock(char const *s1, char const *s2, int n, int param)
 	if (param == 2 || param == 3)
 		free((void *)s2);
 	return (ptr);
+}
+size_t	ft_strlcpy(char *dst, const char *src, size_t size)
+{
+	size_t	count;
+	size_t	src_size;
+
+	if (src && dst)
+	{
+		count = 0;
+		src_size = ft_strlen(src);
+		if (size == 0)
+			return (src_size);
+		while (count++ < size - 1 && *src)
+			*dst++ = *src++;
+		*dst = '\0';
+		return ((count > src_size) ? --count : src_size);
+	}
+	return (0);
 }

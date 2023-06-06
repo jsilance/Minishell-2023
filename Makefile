@@ -1,3 +1,5 @@
+# ======================================================================
+# 
 #  ███▄ ▄███▓ ██▓ ███▄    █  ██▓  ██████  ██░ ██ ▓█████  ██▓     ██▓
 # ▓██▒▀█▀ ██▒▓██▒ ██ ▀█   █ ▓██▒▒██    ▒ ▓██░ ██▒▓█   ▀ ▓██▒    ▓██▒
 # ▓██    ▓██░▒██▒▓██  ▀█ ██▒▒██▒░ ▓██▄   ▒██▀▀██░▒███   ▒██░    ▒██░
@@ -12,16 +14,6 @@
 
 NAME = minishell
 
-# ======DEFINE COLORS======
-
-RED = "\e[31m"
-CYAN = "\e[36m"
-MAGENTA = "\e[35m"
-GREEN = "\e[92m"
-ENDCOLOR = "\e[0m"
-
-# echo -e "${RED}Red text${ENDCOLOR}"
-
 # ======SOURCES======
 
 SRCS = main.c path_finder.c parsing.c ft_pipe.c str_var.c signal.c\
@@ -31,7 +23,7 @@ LIBFT = ft_strchr.c ft_strnstr.c ft_memcpy.c ft_strdup.c ft_strlen.c ft_strtrim.
 
 LLIST = arg_to_list.c arg_list_utils.c cmd_list_utils.c arg_to_tab.c \
 
-BASE_PROG = ft_execute.c echo.c ft_unset.c ft_export.c ft_env.c \
+BASE_PROG = ft_execute.c echo.c ft_unset.c ft_export.c ft_env.c ft_cd.c \
 
 # ======ADD PREFIX======
 
@@ -47,7 +39,7 @@ CFLAGS = -Wall -Wextra -Werror -I includes/ -g3 -fsanitize=address
 
 # ======LDFLAGS======
 
-LDFLAGS = -lreadline
+LDFLAGS = -lreadline -L /Users/$(USER)/.brew/Opt/readline/lib -I /Users/$(USER)/.brew/Opt/readline/include
 
 # ======RULES FOR OBJECTS COMPILATION======
 
@@ -61,35 +53,27 @@ ALL_OBJ = ${OBJ} ${OBJ_LIBFT} ${OBJ_LLIST} ${OBJ_BASE_PROG}
 
 # ======RULES======
 
-${NAME}: set_green ${ALL_OBJ}
+${NAME}: ${ALL_OBJ}
 		@echo "\n======COMPILING <<${NAME}>>======\n"
 		gcc ${CFLAGS} ${ALL_OBJ} ${LDFLAGS} -o ${NAME}
-		@echo ${MAGENTA}
-		@echo ${NAME} "\e[0m"HAS BEEN CREATED AND IS READY TO USE
-		@echo ${ENDCOLOR}
+		@echo "\n======COMPILING <<${NAME}>> COMPLETE======\n"
+		@echo ${NAME} HAS BEEN CREATED AND IS READY TO USE
 
 all: ${NAME}
 
 %.o: %.c
 		gcc ${CFLAGS} -c $< -o ${<:.c=.o}
 
-clean: set_red
+clean:
 		@echo "======CLEANING======\n"
 		rm -rf ${ALL_OBJ}
-		@echo ${ENDCOLOR}
+		@echo "\n======CLEANING COMPLETE======\n"
 
 fclean: clean
-		@echo -n ${RED}
 		@echo "======REMOVING <<${NAME}>>======\n"
 		rm -rf ${NAME}
-		@echo ${ENDCOLOR}
+		@echo "\n======REMOVING <<${NAME}>> COMPLETE======\n"
 
 re: fclean all
-
-set_green:
-		@echo ${GREEN}
-
-set_red:
-		@echo ${RED}
 
 .PHONY: all re clean fclean

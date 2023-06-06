@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_execute.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jusilanc <jusilanc@student.s19.be>         +#+  +:+       +#+        */
+/*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 18:48:21 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/03 21:13:27 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/06/06 21:14:47 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ static int	command_selector(t_lst_arg *ptr, char ***env)
 
 	if (ft_strncmp(ptr->content, "echo", 5) == 32)
 		ft_echo(ptr, *env);
+	else if (!ft_strncmp(ptr->content, "cd", ptr->len))
+		*env = ft_cd(ptr, *env);
 	else if (ft_strncmp(ptr->content, "unset", 6) == 32)
 		*env = ft_unset(ptr, *env);
 	else if (ft_strncmp(ptr->content, "export", 7) == 32)

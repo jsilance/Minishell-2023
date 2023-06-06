@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jusilanc <jusilanc@student.s19.be>         +#+  +:+       +#+        */
+/*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 20:22:58 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/03 20:25:49 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/06/06 20:36:47 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,6 @@ char	*ft_strnchr(const char *s, int c, int len);
 size_t	ft_len_until_equal(const char *str);
 void	*ft_calloc(size_t count, size_t size);
 void	ft_bzero(void *str, size_t n);
+size_t	ft_strlcpy(char *dst, const char *src, size_t size);
 
 #endif

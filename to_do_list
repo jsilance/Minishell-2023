@@ -29,5 +29,8 @@ echo $patate hello -> devrait fonctionner -> mais prions que ca passe sans qu'on
 
 
 
-
 variable d'environnement full fonctionnel avec: execve, unset, export, echo
+
+remplacer dans l'env qd meme nom d'argument
+
+readline pose possiblement probleme a cause des couleurs

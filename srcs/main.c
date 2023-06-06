@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jusilanc <jusilanc@student.s19.be>         +#+  +:+       +#+        */
+/*   By: avancoll <avancoll@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 16:35:56 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/03 21:53:16 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/06/05 18:10:08 by avancoll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,24 +25,18 @@ static int	ft_error(int errnum, char *line, t_lst_cmd *cmd, char **env)
 	exit(errnum);
 }
 
-void	sighandler(int signum)
-{
-	(void)signum;
-	printf("\n");
-	exit(1);
-}
-
 int	main(int argc, char **argv, char **env)
 {
 	t_base	base_var;
 
 	(void)argc;
 	(void)argv;
-	signal(SIGINT, sighandler);
+	signal(SIGINT, sig_handler);
+	signal(SIGQUIT, sig_handler);
 	base_var.env_cpy = ft_tabdup(env);
 	while (1)
 	{
-		base_var.line = readline("\033[0;36m$\033[0;32m ->\033[0m ");
+		base_var.line = readline("minishell$ "); //("\033[0;36m$\033[0;32m ->\033[0m ")
 		if (!base_var.line)
 			ft_error(1, base_var.line, NULL, base_var.env_cpy);
 		add_history(base_var.line);

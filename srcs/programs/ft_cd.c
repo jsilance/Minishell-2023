@@ -6,7 +6,7 @@
 /*   By: jusilanc <jusilanc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 16:20:25 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/07 00:51:29 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/06/08 21:43:38 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,9 @@ char	**ft_cd(t_lst_arg *arg, char **env)
 		tmp_str = ft_strnstock("OLDPWD=", str, -1, 0);
 		if (!tmp_str)
 			return (env);
-		dir = ft_str_var_process(ft_strndup(arg->content, arg->len), env);
+		temp = ft_strndup(arg->content, arg->len);
+		dir = ft_str_var_process(temp, env);
+		free(temp);
 		if (!dir)
 		{
 			free(tmp_str);
@@ -45,6 +47,7 @@ char	**ft_cd(t_lst_arg *arg, char **env)
 			free(dir);
 			return (env);
 		}
+		free(dir);
 		temp = ft_str_var_process(tmp_str, env);
 		if (!temp)
 			return (env);
@@ -65,12 +68,8 @@ char	**ft_cd(t_lst_arg *arg, char **env)
 			return (env);
 		free(tmp_str);
 		if (ft_tab_finder(env, temp))
-		{
 			env = ft_tab_delone(env, temp);
-			env = ft_tab_append(env, temp);
-		}
-		else
-			perror(NULL);
+		env = ft_tab_append(env, temp);
 	}
 	else
 	{

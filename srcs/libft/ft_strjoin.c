@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jusilanc <jusilanc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 11:41:22 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/06 20:36:43 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/06/08 21:40:11 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,21 +58,25 @@ char	*ft_strnstock(char const *s1, char const *s2, int n, int param)
 		free((void *)s2);
 	return (ptr);
 }
-size_t	ft_strlcpy(char *dst, const char *src, size_t size)
-{
-	size_t	count;
-	size_t	src_size;
 
-	if (src && dst)
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
+{
+	size_t	i;
+	char	*ptr;
+
+	i = 0;
+	ptr = (char *)src;
+	if (!dst || !src)
+		return (0);
+	if (dstsize == 0)
+		return (ft_strlen(src));
+	while (*src && i < dstsize - 1)
 	{
-		count = 0;
-		src_size = ft_strlen(src);
-		if (size == 0)
-			return (src_size);
-		while (count++ < size - 1 && *src)
-			*dst++ = *src++;
-		*dst = '\0';
-		return ((count > src_size) ? --count : src_size);
+		*dst++ = *src++;
+		i++;
 	}
-	return (0);
+	*dst = '\0';
+	if (i > ft_strlen(ptr))
+		return (i - 1);
+	return (ft_strlen(ptr));
 }

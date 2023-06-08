@@ -6,7 +6,7 @@
 /*   By: jusilanc <jusilanc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 18:48:21 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/07 00:53:34 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/06/08 21:18:18 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ static int	command_selector(t_lst_arg *ptr, char ***env)
 		ft_echo(ptr, *env);
 	else if (!ft_strncmp(ptr->content, "cd", ptr->len))
 		*env = ft_cd(ptr, *env);
+	else if (!ft_strncmp(ptr->content, "pwd", ptr->len))
+		ft_pwd(ptr, *env);
 	else if (!ft_strncmp(ptr->content, "unset", ptr->len))
 		*env = ft_unset(ptr, *env);
 	else if (!ft_strncmp(ptr->content, "export", ptr->len))

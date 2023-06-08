@@ -15,11 +15,8 @@ echo $patate hello -> devrait fonctionner -> mais prions que ca passe sans qu'on
 
 echo $(pwd) devrait fonctionner -> mais prions que ca passe sans qu'on le fasse
 
-readline pose possiblement probleme a cause des couleurs
 
-dans echo si '$ARG' sans espace avant -> fonctionne pas
-
+/!\ gere $?
 
 ------------------------------jusilanc----------------------------------
-/!\ commencer builtin pwd
-/!\ gere $?
+dans echo si '$ARG' sans espace avant -> fonctionne pas

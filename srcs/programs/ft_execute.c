@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_execute.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jusilanc <jusilanc@student.s19.be>         +#+  +:+       +#+        */
+/*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 18:48:21 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/08 21:18:18 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/06/09 15:03:03 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ static void	ft_execute(char *cmd, char **all_args, char **env)
 
 	pid = fork();
 	if (pid == 0)
-		execve(cmd, all_args, env);
+		if (execve(cmd, all_args, env) == -1)
+			perror("minishell");
 	wait(0);
 	ft_multi_free(all_args, ft_tab_size(all_args));
 }
@@ -66,9 +67,17 @@ static int	command_selector(t_lst_arg *ptr, char ***env)
 
 void	ft_cmd_lst_execute(t_lst_cmd *cmd, char ***env)
 {
+	pid_t	pid;
+
 	while (cmd)
 	{
-		command_selector(cmd->arguments, env);
+		// pid = fork();
+		// if (pid == 0)
+		// {
+		if (command_selector(cmd->arguments, env) == -1)
+			printf("Error\n");
+		// }
 		cmd = cmd->next;
 	}
+	// wait(0);
 }

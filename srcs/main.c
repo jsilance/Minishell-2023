@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: avancoll <avancoll@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 16:35:56 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/06 18:31:33 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/06/09 16:44:03 by avancoll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,17 +31,19 @@ int	main(int argc, char **argv, char **env)
 
 	(void)argc;
 	(void)argv;
-	sig_handler(1);
-		//pour linstant pas focntionnel; 0 qd ds le prompt et 1 qd dans un process
 	base_var.env_cpy = ft_tabdup(env);
 	while (1)
 	{
+		sig_handler(0);
 		base_var.line = readline("minishell$ ");
+		sig_handler(1);
 		if (base_var.line == NULL)
 		{
 			printf("exit\n");
 			exit(130);
 		}
+		if (!ft_strncmp(base_var.line,"./minishell ", 12))
+			sig_handler(2);
 		add_history(base_var.line);
 		if (base_var.line && !ft_strncmp(base_var.line, "exit", 4))
 			ft_error(0, base_var.line, NULL, base_var.env_cpy);

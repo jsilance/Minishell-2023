@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: avancoll <avancoll@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 16:48:08 by avancoll          #+#    #+#             */
-/*   Updated: 2023/06/06 18:25:04 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/06/09 16:17:34 by avancoll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,27 +29,34 @@ static void	restore_prompt(int sig)
 static void	ctrl_c(int sig)
 {
 	g_sig_status = 130;
+	printf("\n");
 	(void)sig;
 }
 
 static void	ctrl_backslash(int sig)
 {
 	g_sig_status = 131;
+	printf("Quit: 3\n");
 	(void)sig;
 }
 void	sig_handler(int process)
 {
 	struct termios	term;
 
-	if (!process)
+	if (process == 0)
 	{
 		signal(SIGINT, restore_prompt);
 		signal(SIGQUIT, SIG_IGN);
 	}
-	else
+	else if (process == 1)
 	{
 		signal(SIGINT, ctrl_c);
 		signal(SIGQUIT, ctrl_backslash);
+	}
+	else if (process == 2)
+	{
+		signal(SIGINT, SIG_IGN);
+		signal(SIGQUIT, SIG_IGN);
 	}
 	tcgetattr(0, &term);
 	term.c_lflag &= ~ECHOCTL;

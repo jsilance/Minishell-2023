@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_execute.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: avancoll <avancoll@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 18:48:21 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/09 15:03:03 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/06/09 19:37:25 by avancoll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,17 +39,17 @@ static int	command_selector(t_lst_arg *ptr, char ***env)
 	char	*path_cmd;
 	char	*cmd_str;
 
-	if (!ft_strncmp(ptr->content, "echo", ptr->len))
+	if (!ft_strncmp(ptr->content, "echo", 5))
 		ft_echo(ptr, *env);
 	else if (!ft_strncmp(ptr->content, "cd", ptr->len))
 		*env = ft_cd(ptr, *env);
-	else if (!ft_strncmp(ptr->content, "pwd", ptr->len))
+	else if (!ft_strncmp(ptr->content, "pwd", 4))
 		ft_pwd(ptr, *env);
 	else if (!ft_strncmp(ptr->content, "unset", ptr->len))
 		*env = ft_unset(ptr, *env);
 	else if (!ft_strncmp(ptr->content, "export", ptr->len))
 		*env = ft_export(ptr, *env);
-	else if (!ft_strncmp(ptr->content, "env", ptr->len))
+	else if (!ft_strncmp(ptr->content, "env", 4))
 		ft_env(*env);
 	else
 	{
@@ -67,7 +67,7 @@ static int	command_selector(t_lst_arg *ptr, char ***env)
 
 void	ft_cmd_lst_execute(t_lst_cmd *cmd, char ***env)
 {
-	pid_t	pid;
+	// pid_t	pid;
 
 	while (cmd)
 	{

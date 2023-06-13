@@ -6,25 +6,29 @@
 /*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 13:39:43 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/13 11:06:40 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/06/13 13:21:54 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	n_option(char *arg, size_t arg_len)
+static int	n_option(char *arg, size_t arg_len, char **env)
 {
 	size_t	i;
+	char	*tmp;
+	char	*str;
 
+	tmp = ft_strndup(arg, arg_len);
+	str = ft_str_var_process(tmp, env);
 	i = 0;
-	while (ft_strchr("'\"", arg[i]))
+	while (ft_strchr("'\"", str[i]) && str[i])
 		i++;
-	if (arg[i++] == '-')
+	if (str[i] && str[i++] == '-')
 	{
-		while (arg[i] == 'n' && i < arg_len)
+		while (str[i] == 'n' && str[i])
 			i++;
-		if (ft_strchr("\"'n", arg[i - 1]))
-			if ((ft_strchr("\"'", arg[i]) || (arg[i] == ' ' && i == arg_len)))
+		if (ft_strchr("\"'n", str[i - 1] && str[i]))
+			if ((ft_strchr("\"'", str[i])))
 				return (1);
 	}
 	return (0);
@@ -61,7 +65,7 @@ int	ft_echo(t_lst_arg *arg, char **env)
 		return (-1);
 	else
 		arg = arg->next;
-	while (arg && n_option(arg->content, arg->len))
+	while (arg && n_option(arg->content, arg->len, env))
 	{
 		no_newline = 1;
 		arg = arg->next;

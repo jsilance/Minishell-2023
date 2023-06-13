@@ -6,7 +6,7 @@
 /*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 18:48:21 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/13 11:03:01 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/06/13 14:02:54 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,10 @@ static void	ft_execute(char *cmd, char **all_args, char **env)
 
 	pid = fork();
 	if (pid == 0)
-		if (execve(cmd, all_args, env) == -1)
-			perror("minishell");
+	{
+		execve(cmd, all_args, env);
+		perror("execve");
+	}
 	wait(0);
 	ft_multi_free(all_args, ft_tab_size(all_args));
 }
@@ -62,21 +64,34 @@ static int	command_selector(t_lst_arg *ptr, char ***env)
 		free(cmd_str);
 		free(path_cmd);
 	}
+	exit(0);
 	return (0);
 }
 
 void	ft_cmd_lst_execute(t_lst_cmd *cmd, char ***env)
 {
-	// pid_t	pid;
+	pid_t	pid;
+	int		fd_d_in;
+	int		fd_d_out;
+
+	fd_prev_out = 1;
+	fd_d_in = dup(STDIN_FILENO);
+	fd_d_out = dup(STDOUT_FILENO);
 	while (cmd)
 	{
-		// pid = fork();
-		// if (pid == 0)
-		// {
-		if (command_selector(cmd->arguments, env) == -1)
-			printf("Error\n");
-		// }
+		pid = fork();
+		// if (cmd->fd_in != 0)
+		// 	dup2(cmd->fd_in, STDIN_FILENO);
+		// if (cmd->fd_out != 1)
+		// dup2(cmd->fd_out, STDOUT_FILENO);
+		if (pid == 0)
+		{
+			if (command_selector(cmd->arguments, env) == -1)
+				printf("Error\n");
+		}
 		cmd = cmd->next;
 	}
-	// wait(0);
+	wait(0);
+	dup2(fd_d_in, STDIN_FILENO);
+	dup2(fd_d_out, STDOUT_FILENO);
 }

@@ -20,11 +20,3 @@ echo $(pwd) devrait fonctionner -> mais prions que ca passe sans qu'on le fasse
 ------------------------------jusilanc----------------------------------
 dans echo si '$ARG' sans espace avant -> fonctionne pas
 /!\ gerer les redirection (dup2, ceation de fichier si > ou >>...)
-
-
-
-
-
-IMPORTANT Nos commandes qui interagissent ne fonctionnent pas bien (patche a moitie, ceux aui interagissent avec l'env sont etranges)
-Dans command_selector il faut modifier la valeur de la len de strncmp pour ceux aui interagissent avec l'env
-Avant ca acceptait e, ec, ech, pour echo par exemple

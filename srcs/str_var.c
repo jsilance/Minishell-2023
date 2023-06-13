@@ -6,7 +6,7 @@
 /*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/03 23:28:04 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/13 16:35:04 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/06/13 17:16:38 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ char	*var_to_str(char *str, char **env, size_t *i)
 	temp = ft_substr(str, 0, j);
 	if (!temp)
 		return (NULL);
-	if (ft_strcmp(temp, "?") == 0)
+	if (!ft_strcmp(temp, "?"))
 		ptr = ft_itoa(g_sig_status);
 	else
 		tmp_ptr = ft_tab_finder(env, temp);

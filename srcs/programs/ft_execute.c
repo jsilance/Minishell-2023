@@ -6,7 +6,7 @@
 /*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 18:48:21 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/13 15:44:21 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/06/13 17:34:44 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,9 @@ static int	command_selector(t_lst_arg *ptr, char ***env)
 {
 	char	*path_cmd;
 	char	*cmd_str;
+	int		ret;
 
+	ret = 0;
 	if (ft_strscmp(ptr->content, "echo"))
 		ft_echo(ptr, *env);
 	else if (ft_strscmp(ptr->content, "cd"))
@@ -50,20 +52,24 @@ static int	command_selector(t_lst_arg *ptr, char ***env)
 	{
 		cmd_str = ft_strndup(ptr->content, ptr->len);
 		path_cmd = cmd_path(cmd_str, ft_path_finder(*env));
+		g_sig_status = 10;
 		if (!path_cmd)
+		{
 			printf("minishell: %s: %s\n", cmd_str, "command not found");
+			ret = 127;
+		}
 		else
 			ft_execute(path_cmd, arg_to_tab(ptr, *env), *env);
 		free(cmd_str);
 		free(path_cmd);
 	}
-	exit(0);
-	return (0);
+	exit(ret);
 }
 
 void	ft_cmd_lst_execute(t_lst_cmd *cmd, char ***env)
 {
 	pid_t	pid;
+	int		status;
 	int		fd_d_in;
 	int		fd_d_out;
 
@@ -89,12 +95,11 @@ void	ft_cmd_lst_execute(t_lst_cmd *cmd, char ***env)
 				close(cmd->fd_out);
 				dup2(cmd->next->fd_in, STDIN_FILENO);
 			}
-			// waitpid(pid, NULL, 0);
-			wait(0);
+			waitpid(pid, &status, 0);
+			g_sig_status = WEXITSTATUS(status);
 		}
 		cmd = cmd->next;
 	}
-	wait(0);
 	dup2(fd_d_in, STDIN_FILENO);
 	dup2(fd_d_out, STDOUT_FILENO);
 }

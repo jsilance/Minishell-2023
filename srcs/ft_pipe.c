@@ -6,7 +6,7 @@
 /*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 16:16:48 by avancoll          #+#    #+#             */
-/*   Updated: 2023/05/26 19:40:17 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/06/13 15:28:07 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ int	ft_pipe(t_lst_cmd *cmd)
 	{
 		if (pipe(fd) < 0)
 			return (-1);
-		cmd->fd_out = fd[0];
-		cmd->next->fd_in = fd[1];
+		cmd->fd_out = fd[1];
+		cmd->next->fd_in = fd[0];
 		cmd = cmd->next;
 	}
 	return (0);

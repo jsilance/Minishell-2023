@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jusilanc <jusilanc@student.s19.be>         +#+  +:+       +#+        */
+/*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 15:13:27 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/07 01:13:49 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/06/13 11:16:05 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ char	**ft_export(t_lst_arg *arg, char **env)
 	char	**env_cpy;
 
 	env_cpy = NULL;
-	if (ft_strncmp(arg->content, "export", arg->len))
+	if (!ft_strscmp(arg->content, "export"))
 		return (env);
 	else
 		arg = arg->next;

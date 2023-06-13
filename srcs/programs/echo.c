@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jusilanc <jusilanc@student.s19.be>         +#+  +:+       +#+        */
+/*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 13:39:43 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/04 01:22:42 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/06/13 11:06:40 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	ft_echo(t_lst_arg *arg, char **env)
 
 	is_first = 1;
 	no_newline = 0;
-	if (ft_strncmp(arg->content, "echo", 5) != 32)
+	if (!ft_strscmp(arg->content, "echo"))
 		return (-1);
 	else
 		arg = arg->next;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jusilanc <jusilanc@student.s19.be>         +#+  +:+       +#+        */
+/*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 16:20:25 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/08 21:43:38 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/06/13 11:14:49 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	**ft_cd(t_lst_arg *arg, char **env)
 	char	*temp;
 	char	*dir;
 
-	if (ft_strncmp(arg->content, "cd", arg->len))
+	if (!ft_strscmp(arg->content, "cd"))
 		return (env);
 	if (arg->next)
 	{

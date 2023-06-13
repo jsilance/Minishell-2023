@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_unset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jusilanc <jusilanc@student.s19.be>         +#+  +:+       +#+        */
+/*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 23:12:48 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/03 20:47:44 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/06/13 11:15:39 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	**ft_unset(t_lst_arg *arg, char **env)
 	char	*temp;
 	char	*str;
 
-	if (ft_strncmp(arg->content, "unset", 6) != 32)
+	if (!ft_strscmp(arg->content, "unset"))
 		return (env);
 	else
 		arg = arg->next;

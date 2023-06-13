@@ -6,7 +6,7 @@
 /*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 13:39:43 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/13 13:21:54 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/06/13 16:25:29 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ static int	n_option(char *arg, size_t arg_len, char **env)
 
 	tmp = ft_strndup(arg, arg_len);
 	str = ft_str_var_process(tmp, env);
+	if (!str)
+		str = tmp;
 	i = 0;
 	while (ft_strchr("'\"", str[i]) && str[i])
 		i++;

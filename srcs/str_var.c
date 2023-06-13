@@ -6,7 +6,7 @@
 /*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/03 23:28:04 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/09 10:31:46 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/06/13 16:35:04 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	is_valid_var_char(char c)
 {
 	return ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0'
-			&& c <= '9') || (c == '-') || (c == '_'));
+			&& c <= '9') || (c == '-') || (c == '_') || (c == '?'));
 }
 
 static void	single_quote(char *arg, size_t *i, char **ptr)
@@ -55,6 +55,7 @@ char	*var_to_str(char *str, char **env, size_t *i)
 
 	j = 0;
 	ptr = NULL;
+	tmp_ptr = NULL;
 	if (!str)
 		return (NULL);
 	while (str[j] && is_valid_var_char(str[j]))
@@ -62,7 +63,10 @@ char	*var_to_str(char *str, char **env, size_t *i)
 	temp = ft_substr(str, 0, j);
 	if (!temp)
 		return (NULL);
-	tmp_ptr = ft_tab_finder(env, temp);
+	if (ft_strcmp(temp, "?") == 0)
+		ptr = ft_itoa(g_sig_status);
+	else
+		tmp_ptr = ft_tab_finder(env, temp);
 	if (tmp_ptr)
 		ptr = ft_strndup(&tmp_ptr[ft_len_until_equal(tmp_ptr) + 1], -1);
 	free(temp);

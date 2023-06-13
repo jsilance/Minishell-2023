@@ -6,7 +6,7 @@
 /*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 16:36:33 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/06 18:00:51 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/06/13 16:34:30 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ typedef struct s_base
 	t_lst_cmd	*cmd_lst;
 	int			status;
 }				t_base;
+
+int				g_sig_status;
 
 t_lst_cmd		*ft_parsing(char *line, int i, int len, t_lst_cmd *cmd_lst);
 

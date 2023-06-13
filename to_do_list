@@ -1,11 +1,3 @@
-/!\ gerer les pipes
-
-/!\ gestion des signaux de retour de commande
-
-/!\ verifier le bon fonctionnement de ctrl-C ctrl-D ctrl-\
-
-/!\ bien refaire builtin exit
-
 gestion de toutes les erreures type malloc
 
 
@@ -14,8 +6,11 @@ echo $patate hello -> devrait fonctionner -> mais prions que ca passe sans qu'on
 
 echo $(pwd) devrait fonctionner -> mais prions que ca passe sans qu'on le fasse
 
+/!\ cat | cat | ls ne marche pas correctement
 
 /!\ gere $?
+
+/!\ echo "yolo les $?"amis -> erreur de parsing
 
 ------------------------------jusilanc----------------------------------
 dans echo si '$ARG' sans espace avant -> fonctionne pas

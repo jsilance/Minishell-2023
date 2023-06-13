@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_execute.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: avancoll <avancoll@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 18:48:21 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/13 17:34:44 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/06/13 19:05:14 by avancoll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,8 @@ void	ft_cmd_lst_execute(t_lst_cmd *cmd, char ***env)
 				dup2(cmd->next->fd_in, STDIN_FILENO);
 			}
 			waitpid(pid, &status, 0);
-			g_sig_status = WEXITSTATUS(status);
+			if (WIFEXITED(status))
+				g_sig_status = WEXITSTATUS(status);
 		}
 		cmd = cmd->next;
 	}

@@ -3,18 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: avancoll <avancoll@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 16:48:08 by avancoll          #+#    #+#             */
-/*   Updated: 2023/06/13 17:03:00 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/06/13 19:02:50 by avancoll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-// int			g_sig_status = 0; //=127 qd cmd not found,
-// 130 qd cmd interrompue,
-//0 qd tout va bien,
 
 static void	restore_prompt(int sig)
 {

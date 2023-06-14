@@ -6,7 +6,7 @@
 /*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 17:33:56 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/05/29 13:20:23 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/06/14 16:44:11 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ t_lst_cmd	*ft_cmd_list_new(t_lst_arg *arg)
 	node->arguments = arg;
 	node->fd_in = 0;
 	node->fd_out = 1;
-	node->output_type = 0;
+	node->output_type = DEFAULT;
+	node->input_type = DEFAULT;
 	node->next = NULL;
 	return (node);
 }

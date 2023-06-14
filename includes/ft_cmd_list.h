@@ -6,7 +6,7 @@
 /*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 16:30:41 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/14 13:18:52 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/06/14 16:42:49 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct s_lst_cmd
 	t_lst_arg			*arguments;
 	int					fd_in;
 	int					fd_out;
+	int					input_type;
 	int					output_type;
 }						t_lst_cmd;
 

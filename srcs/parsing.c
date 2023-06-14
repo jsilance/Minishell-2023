@@ -6,7 +6,7 @@
 /*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 14:28:48 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/14 13:23:43 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/06/14 14:38:56 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,39 @@ static int	output_type_selector(char *line)
 		return (PIPE);
 	else if (line[0] == '>' && line[1] == '>')
 		return (APPEND);
+	else if (line[0] == '<' && line[1] == '<')
+		return (HERE_DOC);
+	else if (line[0] == '<')
+		return (READ);
 	else if (line[0] == '>')
 		return (OVERWRITE);
 	return (-1);
 }
+
+// static void	rm_redir_lst(t_lst_cmd *cmd)
+// {
+// 	t_lst_arg	*arg;
+// 	t_lst_arg	*arg_prev;
+
+// 	while (cmd)
+// 	{
+// 		arg = cmd->arg;
+// 		while (arg)
+// 		{
+// 			if (output_type_selector(arg) != -1)
+// 			{
+// 				cmd->output_type = output_type_selector(arg);
+// 				arg = arg->next;
+// 				if (cmd->output_type == APPEND)
+// 					cmd->fd_in = open();
+						//include le fichier demander en arg mais en ft_strndup
+// 			}
+// 			arg_prev = arg;
+// 			arg = arg->next;
+// 		}
+// 		cmd = cmd->next;
+// 	}
+// }
 
 t_lst_cmd	*ft_parsing(char *line, int i, int len, t_lst_cmd *cmd_lst)
 {

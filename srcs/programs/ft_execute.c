@@ -6,7 +6,7 @@
 /*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 18:48:21 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/14 13:20:45 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/06/14 14:35:44 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,8 @@ static int	basic_builtin(t_lst_arg *ptr, char ***env)
 
 // void	input_redir(t_lst_arg *ptr)
 // {
-// 	char	*path_cmd;
 // 	int		input_fd;
 
-// 	ptr = ptr->next;
 // 	input_fd = open(ptr->content, O_RDONLY);
 // 	dup2(input_fd, STDIN_FILENO);
 // }

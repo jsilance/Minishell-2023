@@ -6,7 +6,7 @@
 /*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 18:48:21 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/13 19:53:48 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/06/14 13:20:45 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,16 @@ static int	basic_builtin(t_lst_arg *ptr, char ***env)
 	return (0);
 }
 
+// void	input_redir(t_lst_arg *ptr)
+// {
+// 	char	*path_cmd;
+// 	int		input_fd;
+
+// 	ptr = ptr->next;
+// 	input_fd = open(ptr->content, O_RDONLY);
+// 	dup2(input_fd, STDIN_FILENO);
+// }
+
 static int	command_selector(t_lst_arg *ptr, char ***env)
 {
 	char	*path_cmd;
@@ -53,6 +63,10 @@ static int	command_selector(t_lst_arg *ptr, char ***env)
 		ft_pwd(ptr, *env);
 	else if (ft_strscmp(ptr->content, "env"))
 		ft_env(*env);
+	// else if (ft_strscmp(ptr->content, "<"))
+	// 	input_redir(arg_to_tab(ptr, *env), *env, ptr);
+	// else if (ft_strscmp(ptr->content, "<<"))
+	// 	printf("here2\n");
 	else
 	{
 		cmd_str = ft_strndup(ptr->content, ptr->len);

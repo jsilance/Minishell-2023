@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jusilanc <jusilanc@student.s19.be>         +#+  +:+       +#+        */
+/*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 14:28:48 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/03 21:39:30 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/06/14 13:23:43 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,19 @@ t_lst_cmd	*ft_parsing(char *line, int i, int len, t_lst_cmd *cmd_lst)
 				i++;
 			while (line[i] && line[i] == ' ')
 				i++;
+			printf("+%s+\n", ft_lst_last(cmd->arguments)->content);
+			if (ft_strscmp(ft_lst_last(cmd->arguments)->content, "<"))
+				cmd->output_type = READ;
+			else if (ft_strscmp(ft_lst_last(cmd->arguments)->content, "<<"))
+				cmd->output_type = HERE_DOC;
+			else if (ft_strscmp(ft_lst_last(cmd->arguments)->content, ">"))
+				cmd->output_type = OVERWRITE;
+			else if (ft_strscmp(ft_lst_last(cmd->arguments)->content, ">>"))
+				cmd->output_type = APPEND;
 		}
 		cmd->output_type = output_type_selector(&line[i]);
 		i += (cmd->output_type == APPEND) + (line[i] != 0);
 	}
+	ft_cmd_lst_print(cmd_lst);
 	return (cmd_lst);
 }

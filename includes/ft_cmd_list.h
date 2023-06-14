@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cmd_list.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jusilanc <jusilanc@student.s19.be>         +#+  +:+       +#+        */
+/*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 16:30:41 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/03 20:52:39 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/06/14 13:18:52 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,9 @@ enum					e_output_type
 	DEFAULT = 1,
 	PIPE,
 	OVERWRITE,
-	APPEND
+	APPEND,
+	READ,
+	HERE_DOC
 };
 typedef struct s_lst_arg
 {

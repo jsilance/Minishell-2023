@@ -1,17 +1,9 @@
 gestion de toutes les erreures type malloc
 
 
-export patate="-n"
-echo $patate hello -> devrait fonctionner -> mais prions que ca passe sans qu'on le fasse
-
-echo $(pwd) devrait fonctionner -> mais prions que ca passe sans qu'on le fasse
+sortir "<" "<<" ">" ">>" du parsing
 
 /!\ cat | cat | ls ne marche pas correctement
 
-/!\ gere $?
-
-/!\ echo "yolo les $?"amis -> erreur de parsing
-
 ------------------------------jusilanc----------------------------------
-dans echo si '$ARG' sans espace avant -> fonctionne pas
 /!\ gerer les redirection (dup2, ceation de fichier si > ou >>...)

@@ -6,7 +6,7 @@
 /*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 14:28:48 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/14 14:38:56 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/06/14 15:37:33 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,19 +69,44 @@ static int	output_type_selector(char *line)
 // {
 // 	t_lst_arg	*arg;
 // 	t_lst_arg	*arg_prev;
+// 	char		*tmp;
 
 // 	while (cmd)
 // 	{
-// 		arg = cmd->arg;
+// 		arg = cmd->arguments;
 // 		while (arg)
 // 		{
-// 			if (output_type_selector(arg) != -1)
+// 			if (output_type_selector(arg->content) != -1)
 // 			{
-// 				cmd->output_type = output_type_selector(arg);
+// 				cmd->output_type = output_type_selector(arg->content);
 // 				arg = arg->next;
 // 				if (cmd->output_type == APPEND)
-// 					cmd->fd_in = open();
-						//include le fichier demander en arg mais en ft_strndup
+// 				{
+// 					tmp = ft_strndup(arg->content, arg->len);
+// 					cmd->fd_in = open(tmp, O_RDONLY);
+// 					if (cmd->fd_in == -1)
+// 						perror("minishell");
+// 					free(tmp);
+// 				}
+// 				else if (cmd->output_type == OVERWRITE)
+// 				{
+// 					tmp = ft_strndup(arg->content, arg->len);
+// 					cmd->fd_out = open(tmp, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+// 					if (cmd->fd_out == -1)
+// 						perror("minishell");
+// 					free(tmp);
+// 				}
+// 				else if (cmd->output_type == APPEND)
+// 				{
+// 					tmp = ft_strndup(arg->content, arg->len);
+// 					cmd->fd_out = open(tmp, O_WRONLY | O_CREAT | O_APPEND,
+// 							0644);
+// 					if (cmd->fd_out == -1)
+// 						perror("minishell");
+// 					free(tmp);
+// 				}
+// 				arg_prev->next = arg->next;
+// 				// need to free previous arg
 // 			}
 // 			arg_prev = arg;
 // 			arg = arg->next;

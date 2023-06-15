@@ -6,11 +6,22 @@
 /*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 16:20:25 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/13 11:14:49 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/06/15 10:07:41 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static char	*cd_special_case(char *str)
+{
+	if (!ft_strcmp(str, "-") || !ft_strcmp(str, "'-'") || !ft_strcmp(str,
+			"\"-\""))
+	{
+		free(str);
+		return (ft_strdup("$OLDPWD"));
+	}
+	return (str);
+}
 
 char	**ft_cd(t_lst_arg *arg, char **env)
 {
@@ -34,6 +45,7 @@ char	**ft_cd(t_lst_arg *arg, char **env)
 		if (!tmp_str)
 			return (env);
 		temp = ft_strndup(arg->content, arg->len);
+		temp = cd_special_case(temp);
 		dir = ft_str_var_process(temp, env);
 		free(temp);
 		if (!dir)

@@ -6,7 +6,7 @@
 /*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 14:28:48 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/14 17:06:27 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/06/15 09:44:39 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,6 @@ t_lst_cmd	*ft_parsing(char *line, int i, int len, t_lst_cmd *cmd_lst)
 				i++;
 			while (line[i] && line[i] == ' ')
 				i++;
-			// printf("+%s+\n", ft_lst_last(cmd->arguments)->content);
 			if (ft_strscmp(ft_lst_last(cmd->arguments)->content, "<"))
 				cmd->output_type = READ;
 			else if (ft_strscmp(ft_lst_last(cmd->arguments)->content, "<<"))
@@ -153,6 +152,6 @@ t_lst_cmd	*ft_parsing(char *line, int i, int len, t_lst_cmd *cmd_lst)
 		i += (cmd->output_type == APPEND) + (line[i] != 0);
 		rm_redir_lst(cmd);
 	}
-	ft_cmd_lst_print(cmd_lst);
+	// ft_cmd_lst_print(cmd_lst);
 	return (cmd_lst);
 }

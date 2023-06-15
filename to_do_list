@@ -6,4 +6,4 @@ sortir "<" "<<" ">" ">>" du parsing
 /!\ cat | cat | ls ne marche pas correctement
 
 ------------------------------jusilanc----------------------------------
-/!\ gerer les redirection (dup2, ceation de fichier si > ou >>...)
+gerer cd ~

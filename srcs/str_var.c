@@ -6,7 +6,7 @@
 /*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/03 23:28:04 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/13 17:16:38 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/06/15 13:25:46 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,11 +85,19 @@ char	*ft_str_var_process(char *arg, char **env)
 	while (arg[i])
 	{
 		j = 0;
-		if (!ft_strchr("'\"$", arg[i]))
+		if (arg[i] == '~')
+		{
+			if (!arg[i + 1] || (arg[i + 1] && arg[i + 1] == '/'))
+			{
+				ptr = ft_strnstock(ptr, var_to_str("HOME", env, &i), -1, 3);
+				i -= 3;
+			}
+		}
+		if (arg[i] && !ft_strchr("'\"$", arg[i]))
 		{
 			while (arg[i + j] && !ft_strchr("'\"$", arg[i + j]))
 				j++;
-			ptr = ft_strnstock(ptr, ft_substr(&arg[i], i, j), -1, 3);
+			ptr = ft_strnstock(ptr, ft_substr(&arg[i], 0, j), -1, 3);
 			i += j;
 		}
 		if (arg[i] == '"')

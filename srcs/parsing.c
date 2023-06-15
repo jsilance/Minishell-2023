@@ -6,7 +6,7 @@
 /*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 14:28:48 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/15 18:09:22 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/06/15 19:23:19 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ static void	rm_redir_lst(t_lst_cmd *cmd)
 		arg = cmd->arguments;
 		while (arg)
 		{
+			// print les operations de dl car dl qu'une seule fois
 			if (output_type_selector(arg->content) != -1)
 			{
 				cmd->output_type = output_type_selector(arg->content);
@@ -106,8 +107,15 @@ static void	rm_redir_lst(t_lst_cmd *cmd)
 						perror("minishell");
 					free(tmp);
 				}
-				else if (cmd->output_type == APPEND)
+				else if (cmd->output_type == HERE_DOC)
 				{
+					heredoc(cmd->arguments, NULL);
+					cmd->fd_in = open(".tmp", O_RDONLY);
+					if (cmd->fd_in == -1)
+						perror("minishell");
+					printf("(%d)\n", cmd->fd_in);
+					// envoyer cmd plutot que cmd->arguments
+					// unlink .tmp apres execution
 				}
 				// free(arg_prev->next);
 				if (arg_prev)
@@ -147,12 +155,12 @@ t_lst_cmd	*ft_parsing(char *line, int i, int len, t_lst_cmd *cmd_lst)
 			if (ft_strscmp(ft_lst_last(cmd->arguments)->content, "<"))
 				cmd->input_type = READ;
 			else if (ft_strscmp(ft_lst_last(cmd->arguments)->content, "<<"))
-				cmd->input_type = READ;
+				cmd->input_type = HERE_DOC;
 			else if (ft_strscmp(ft_lst_last(cmd->arguments)->content, ">"))
 				cmd->output_type = OVERWRITE;
 			else if (ft_strscmp(ft_lst_last(cmd->arguments)->content, ">>"))
 				cmd->output_type = APPEND;
-			// cmd->input_type = HERE_DOC;
+			// cmd->input_type = READ;
 		}
 		cmd->output_type = output_type_selector(&line[i]);
 		i += (cmd->output_type == APPEND) + (line[i] != 0);

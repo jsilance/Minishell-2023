@@ -6,7 +6,7 @@
 /*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 18:48:21 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/15 18:20:11 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/06/15 19:19:07 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,13 +78,16 @@ static int	command_selector(t_lst_arg *ptr, char ***env)
 
 void	ft_cmd_lst_execute(t_lst_cmd *cmd, char ***env)
 {
-	pid_t	pid;
-	int		status;
-	int		fd_d_in;
-	int		fd_d_out;
+	pid_t		pid;
+	int			status;
+	t_lst_cmd	*tmp_cmd;
 
-	fd_d_in = dup(STDIN_FILENO);
-	fd_d_out = dup(STDOUT_FILENO);
+	// int		fd_d_in;
+	// int		fd_d_out;
+	// fd_d_in = dup(STDIN_FILENO);
+	// fd_d_out = dup(STDOUT_FILENO);
+	tmp_cmd = cmd;
+	ft_cmd_lst_print(cmd);
 	while (cmd)
 	{
 		if (cmd->arguments && (ft_strscmp(cmd->arguments->content, "unset")
@@ -96,35 +99,37 @@ void	ft_cmd_lst_execute(t_lst_cmd *cmd, char ***env)
 			pid = fork();
 			if (pid == 0)
 			{
-				// if (cmd->input_type == READ)
-				// {
-				// 	dup2(cmd->fd_in, STDIN_FILENO);
-				// }
-				if (cmd->output_type != DEFAULT)
+				if (cmd->output_type == PIPE || cmd->output_type == APPEND
+					|| cmd->output_type == OVERWRITE)
 				{
-					if (cmd->next && cmd->output_type == PIPE)
-						close(cmd->next->fd_in);
 					dup2(cmd->fd_out, STDOUT_FILENO);
-					// close(cmd->fd_out);
+					close(cmd->fd_out);
+				}
+				if (cmd->fd_in)
+				{
+					dup2(cmd->fd_in, STDIN_FILENO);
+					close(cmd->fd_in);
 				}
 				if (command_selector(cmd->arguments, env) == -1)
-					printf("Error\n");
+					ft_putstr_fd("Error\n", 2);
 			}
 			else
 			{
 				if (cmd->next && cmd->output_type == PIPE)
-				{
 					close(cmd->fd_out);
-					dup2(cmd->next->fd_in, STDIN_FILENO);
-					// close(cmd->next->fd_in);
-				}
-				waitpid(pid, &status, 0);
-				if (WIFEXITED(status))
-					g_sig_status = WEXITSTATUS(status);
+				if (cmd->fd_in)
+					close(cmd->fd_in);
 			}
 		}
 		cmd = cmd->next;
 	}
-	dup2(fd_d_in, STDIN_FILENO);
-	dup2(fd_d_out, STDOUT_FILENO);
+	while (tmp_cmd)
+	{
+		waitpid(-1, &status, 0);
+		if (WIFEXITED(status))
+			g_sig_status = WEXITSTATUS(status);
+		tmp_cmd = tmp_cmd->next;
+	}
+	// dup2(fd_d_in, STDIN_FILENO);
+	// dup2(fd_d_out, STDOUT_FILENO);
 }

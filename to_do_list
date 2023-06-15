@@ -1,9 +1,18 @@
 gestion de toutes les erreures type malloc
 
-
-sortir "<" "<<" ">" ">>" du parsing
-
-/!\ cat | cat | ls ne marche pas correctement
+redirection read < <<
 
 ------------------------------jusilanc----------------------------------
-gerer cd ~
+
+
+
+
+
+------------------------------CRASH----------------------------------
+quote non fermee
+
+
+
+------------------------------NO CRASH----------------------------------
+"Command" -> Ctlr + c ==> /n en trop
+cat | cat | ls ne marche pas correctement

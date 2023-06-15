@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_execute.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: avancoll <avancoll@student.s19.be>         +#+  +:+       +#+        */
+/*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 18:48:21 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/15 13:49:39 by avancoll         ###   ########.fr       */
+/*   Updated: 2023/06/15 17:42:34 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,6 @@ static int	basic_builtin(t_lst_arg *ptr, char ***env)
 	return (0);
 }
 
-// void	input_redir(t_lst_arg *ptr)
-// {
-// 	int		input_fd;
-
-// 	input_fd = open(ptr->content, O_RDONLY);
-// 	dup2(input_fd, STDIN_FILENO);
-// }
-
 static int	command_selector(t_lst_arg *ptr, char ***env)
 {
 	char	*path_cmd;
@@ -55,6 +47,8 @@ static int	command_selector(t_lst_arg *ptr, char ***env)
 	int		ret;
 
 	ret = 0;
+	if (!ptr)
+		return (-1);
 	if (ft_strscmp(ptr->content, "echo"))
 		ft_echo(ptr, *env);
 	else if (ft_strscmp(ptr->content, "pwd"))
@@ -67,10 +61,11 @@ static int	command_selector(t_lst_arg *ptr, char ***env)
 	{
 		cmd_str = ft_strndup(ptr->content, ptr->len);
 		path_cmd = cmd_path(cmd_str, ft_path_finder(*env));
-		g_sig_status = 10;
 		if (!path_cmd)
 		{
-			printf("minishell: %s: %s\n", cmd_str, "command not found");
+			ft_putstr_fd("minishell: ", 2);
+			ft_putstr_fd(cmd_str, 2);
+			ft_putstr_fd(": command not found\n", 2);
 			ret = 127;
 		}
 		else
@@ -92,9 +87,9 @@ void	ft_cmd_lst_execute(t_lst_cmd *cmd, char ***env)
 	fd_d_out = dup(STDOUT_FILENO);
 	while (cmd)
 	{
-		if (ft_strscmp(cmd->arguments->content, "unset")
-			|| ft_strscmp(cmd->arguments->content, "export")
-			|| ft_strscmp(cmd->arguments->content, "cd"))
+		if (cmd->arguments && (ft_strscmp(cmd->arguments->content, "unset")
+				|| ft_strscmp(cmd->arguments->content, "export")
+				|| ft_strscmp(cmd->arguments->content, "cd")))
 			g_sig_status = basic_builtin(cmd->arguments, env);
 		else
 		{

@@ -6,7 +6,7 @@
 /*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 14:28:48 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/15 09:44:39 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/06/15 18:09:22 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ static void	rm_redir_lst(t_lst_cmd *cmd)
 	t_lst_arg	*arg_prev;
 	char		*tmp;
 
+	arg_prev = NULL;
 	while (cmd)
 	{
 		arg = cmd->arguments;
@@ -105,8 +106,12 @@ static void	rm_redir_lst(t_lst_cmd *cmd)
 						perror("minishell");
 					free(tmp);
 				}
+				else if (cmd->output_type == APPEND)
+				{
+				}
 				// free(arg_prev->next);
-				arg_prev->next = arg->next;
+				if (arg_prev)
+					arg_prev->next = arg->next;
 				// free(arg);
 				// need to free previous arg
 			}
@@ -140,13 +145,14 @@ t_lst_cmd	*ft_parsing(char *line, int i, int len, t_lst_cmd *cmd_lst)
 			while (line[i] && line[i] == ' ')
 				i++;
 			if (ft_strscmp(ft_lst_last(cmd->arguments)->content, "<"))
-				cmd->output_type = READ;
+				cmd->input_type = READ;
 			else if (ft_strscmp(ft_lst_last(cmd->arguments)->content, "<<"))
-				cmd->output_type = HERE_DOC;
+				cmd->input_type = READ;
 			else if (ft_strscmp(ft_lst_last(cmd->arguments)->content, ">"))
 				cmd->output_type = OVERWRITE;
 			else if (ft_strscmp(ft_lst_last(cmd->arguments)->content, ">>"))
 				cmd->output_type = APPEND;
+			// cmd->input_type = HERE_DOC;
 		}
 		cmd->output_type = output_type_selector(&line[i]);
 		i += (cmd->output_type == APPEND) + (line[i] != 0);

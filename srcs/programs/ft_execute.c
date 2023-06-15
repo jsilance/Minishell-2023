@@ -6,7 +6,7 @@
 /*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 18:48:21 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/15 17:42:34 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/06/15 18:20:11 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ void	ft_cmd_lst_execute(t_lst_cmd *cmd, char ***env)
 					if (cmd->next && cmd->output_type == PIPE)
 						close(cmd->next->fd_in);
 					dup2(cmd->fd_out, STDOUT_FILENO);
+					// close(cmd->fd_out);
 				}
 				if (command_selector(cmd->arguments, env) == -1)
 					printf("Error\n");
@@ -115,6 +116,7 @@ void	ft_cmd_lst_execute(t_lst_cmd *cmd, char ***env)
 				{
 					close(cmd->fd_out);
 					dup2(cmd->next->fd_in, STDIN_FILENO);
+					// close(cmd->next->fd_in);
 				}
 				waitpid(pid, &status, 0);
 				if (WIFEXITED(status))

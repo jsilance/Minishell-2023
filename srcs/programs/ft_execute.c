@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_execute.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: avancoll <avancoll@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 18:48:21 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/14 17:13:45 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/06/15 13:49:39 by avancoll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,8 @@ static int	command_selector(t_lst_arg *ptr, char ***env)
 		ft_pwd(ptr, *env);
 	else if (ft_strscmp(ptr->content, "env"))
 		ft_env(*env);
-	// else if (ft_strscmp(ptr->content, "<"))
-	// 	input_redir(arg_to_tab(ptr, *env), *env, ptr);
-	// else if (ft_strscmp(ptr->content, "<<"))
-	// 	printf("here2\n");
+	else if (ft_strscmp(ptr->content, "<<"))
+		heredoc(ptr, *env);
 	else
 	{
 		cmd_str = ft_strndup(ptr->content, ptr->len);

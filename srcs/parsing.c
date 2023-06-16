@@ -6,7 +6,7 @@
 /*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 14:28:48 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/15 19:23:19 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/06/16 11:35:56 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,11 +109,11 @@ static void	rm_redir_lst(t_lst_cmd *cmd)
 				}
 				else if (cmd->output_type == HERE_DOC)
 				{
-					heredoc(cmd->arguments, NULL);
+					heredoc(arg, NULL);
 					cmd->fd_in = open(".tmp", O_RDONLY);
 					if (cmd->fd_in == -1)
 						perror("minishell");
-					printf("(%d)\n", cmd->fd_in);
+					// printf("(%d)\n", cmd->fd_in);
 					// envoyer cmd plutot que cmd->arguments
 					// unlink .tmp apres execution
 				}
@@ -122,6 +122,7 @@ static void	rm_redir_lst(t_lst_cmd *cmd)
 					arg_prev->next = arg->next;
 				// free(arg);
 				// need to free previous arg
+				// ft_cmd_lst_print(cmd);
 			}
 			arg_prev = arg;
 			arg = arg->next;

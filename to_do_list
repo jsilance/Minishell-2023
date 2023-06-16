@@ -10,9 +10,8 @@ redirection read < <<
 
 ------------------------------CRASH----------------------------------
 quote non fermee
-parsing:80: supprimer
+parsing:80: supprimerd
 
 
 ------------------------------NO CRASH----------------------------------
-"Command" -> Ctlr + c ==> /n en trop
 cat | cat | ls ne marche pas correctement

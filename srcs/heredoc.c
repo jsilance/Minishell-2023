@@ -6,7 +6,7 @@
 /*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 13:46:59 by avancoll          #+#    #+#             */
-/*   Updated: 2023/06/15 19:18:00 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/06/16 11:33:52 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	heredoc(t_lst_arg *ptr, char **env)
 	int		input_fd;
 	char	*line;
 	char	*tmp;
+	char	*delimiter;
 
 	// char	*str;
 	(void)env;
@@ -24,7 +25,11 @@ void	heredoc(t_lst_arg *ptr, char **env)
 	while (1)
 	{
 		line = readline("> ");
-		if (!ft_strncmp(line, ptr->next->next->content, ptr->next->next->len))
+		//probleme par ici avec la string
+		delimiter = ft_strndup(ptr->content, ptr->len);
+		printf("(%s)\t\t", line);
+		printf("[%s]\n", delimiter);
+		if (!ft_strcmp(line, delimiter))
 		{
 			printf("encountered delimiter\n");
 			free(line);

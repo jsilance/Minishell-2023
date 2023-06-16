@@ -6,7 +6,7 @@
 /*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 16:35:56 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/15 18:11:24 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/06/16 09:21:22 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ static int	ft_error(int errnum, char *line, t_lst_cmd *cmd, char **env)
 		ft_cmd_lst_clear(cmd);
 	if (errnum)
 		perror("minishell");
+	unlink(".tmp");
 	exit(errnum);
 }
 

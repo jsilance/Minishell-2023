@@ -6,7 +6,7 @@
 /*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 18:48:21 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/15 19:19:07 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/06/16 11:35:07 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	ft_cmd_lst_execute(t_lst_cmd *cmd, char ***env)
 	// fd_d_in = dup(STDIN_FILENO);
 	// fd_d_out = dup(STDOUT_FILENO);
 	tmp_cmd = cmd;
-	ft_cmd_lst_print(cmd);
+	// ft_cmd_lst_print(cmd);
 	while (cmd)
 	{
 		if (cmd->arguments && (ft_strscmp(cmd->arguments->content, "unset")

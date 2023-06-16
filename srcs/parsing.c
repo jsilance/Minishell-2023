@@ -6,7 +6,7 @@
 /*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 14:28:48 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/16 11:35:56 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/06/16 15:52:36 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,19 @@ void	word_delimeter(char *line, int *i, int *len)
 {
 	while (line[*i + *len] && !ft_strchr(" ;|><", line[*i + *len]))
 	{
-		if (line[*i + *len] == '\"')
+		if (line[*i + *len] == '\"' && ++(*len))
 		{
-			(*len)++;
 			while (line[*i + *len] && line[*i + *len] != '\"')
 				(*len)++;
-			(*len)++;
+			if (line[*i + *len])
+				(*len)++;
 		}
-		else if (line[*i + *len] == '\'')
+		else if (line[*i + *len] == '\'' && ++(*len))
 		{
-			(*len)++;
 			while (line[*i + *len] && line[*i + *len] != '\'')
 				(*len)++;
-			(*len)++;
+			if (line[*i + *len])
+				(*len)++;
 		}
 		else if (line[*i + *len])
 			(*len)++;
@@ -78,7 +78,7 @@ static void	rm_redir_lst(t_lst_cmd *cmd)
 		while (arg)
 		{
 			// print les operations de dl car dl qu'une seule fois
-			if (output_type_selector(arg->content) != -1)
+			while (output_type_selector(arg->content) != -1)
 			{
 				cmd->output_type = output_type_selector(arg->content);
 				arg = arg->next;
@@ -120,6 +120,8 @@ static void	rm_redir_lst(t_lst_cmd *cmd)
 				// free(arg_prev->next);
 				if (arg_prev)
 					arg_prev->next = arg->next;
+				else
+					cmd->arguments = arg->next;
 				// free(arg);
 				// need to free previous arg
 				// ft_cmd_lst_print(cmd);

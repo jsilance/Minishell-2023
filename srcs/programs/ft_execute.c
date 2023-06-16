@@ -6,7 +6,7 @@
 /*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 18:48:21 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/16 11:35:07 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/06/16 15:10:43 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ static int	command_selector(t_lst_arg *ptr, char ***env)
 		ft_pwd(ptr, *env);
 	else if (ft_strscmp(ptr->content, "env"))
 		ft_env(*env);
-	else if (ft_strscmp(ptr->content, "<<"))
-		heredoc(ptr, *env);
+	// else if (ft_strscmp(ptr->content, "<<"))
+	// 	heredoc(ptr, *env);
 	else
 	{
 		cmd_str = ft_strndup(ptr->content, ptr->len);
@@ -82,12 +82,7 @@ void	ft_cmd_lst_execute(t_lst_cmd *cmd, char ***env)
 	int			status;
 	t_lst_cmd	*tmp_cmd;
 
-	// int		fd_d_in;
-	// int		fd_d_out;
-	// fd_d_in = dup(STDIN_FILENO);
-	// fd_d_out = dup(STDOUT_FILENO);
 	tmp_cmd = cmd;
-	// ft_cmd_lst_print(cmd);
 	while (cmd)
 	{
 		if (cmd->arguments && (ft_strscmp(cmd->arguments->content, "unset")
@@ -111,7 +106,7 @@ void	ft_cmd_lst_execute(t_lst_cmd *cmd, char ***env)
 					close(cmd->fd_in);
 				}
 				if (command_selector(cmd->arguments, env) == -1)
-					ft_putstr_fd("Error\n", 2);
+					ft_putstr_fd("Error:109\n", 2);
 			}
 			else
 			{
@@ -130,6 +125,4 @@ void	ft_cmd_lst_execute(t_lst_cmd *cmd, char ***env)
 			g_sig_status = WEXITSTATUS(status);
 		tmp_cmd = tmp_cmd->next;
 	}
-	// dup2(fd_d_in, STDIN_FILENO);
-	// dup2(fd_d_out, STDOUT_FILENO);
 }

@@ -1,16 +1,10 @@
 gestion de toutes les erreures type malloc
 
-redirection read < <<
-
-------------------------------jusilanc----------------------------------
-
-
-
+/!\ gerer les redirection qui se trouvent n'importe ou dans la commande
 
 
 ------------------------------CRASH----------------------------------
-quote non fermee
-parsing:80: supprimerd
+
 
 
 ------------------------------NO CRASH----------------------------------

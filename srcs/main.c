@@ -6,7 +6,7 @@
 /*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 16:35:56 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/16 09:21:22 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/06/16 12:05:01 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,13 @@ int	main(int argc, char **argv, char **env)
 		if (!base_var.env_cpy)
 			ft_error(3, base_var.line, base_var.cmd_lst, base_var.env_cpy);
 		ft_cmd_lst_execute(base_var.cmd_lst, &base_var.env_cpy);
+		unlink(".tmp");
 		ft_cmd_lst_clear(base_var.cmd_lst);
 		free(base_var.line);
 		base_var.line = NULL;
 	}
 	ft_tab_free(base_var.env_cpy);
+	unlink(".tmp");
 	return (0);
 }
 

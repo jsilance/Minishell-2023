@@ -6,7 +6,7 @@
 /*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 20:22:58 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/15 17:00:31 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/06/19 16:35:05 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,6 @@ int		ft_strscmp(char *s1, char *s2);
 char	*ft_itoa(int nb);
 
 void	ft_putstr_fd(char *s, int fd);
+int		ft_atoi(const char *str);
 
 #endif

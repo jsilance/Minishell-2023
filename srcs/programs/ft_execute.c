@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_execute.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: avancoll <avancoll@student.s19.be>         +#+  +:+       +#+        */
+/*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 18:48:21 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/19 13:58:08 by avancoll         ###   ########.fr       */
+/*   Updated: 2023/06/19 17:07:34 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ static int	command_selector(t_lst_arg *ptr, char ***env)
 		ft_pwd(ptr, *env);
 	else if (ft_strscmp(ptr->content, "env"))
 		ft_env(*env);
+	else if (ft_strscmp(ptr->content, "exit"))
+		exit(ft_exit(ptr, *env));
 	else
 	{
 		cmd_str = ft_strndup(ptr->content, ptr->len);
@@ -74,7 +76,7 @@ static int	command_selector(t_lst_arg *ptr, char ***env)
 	exit(ret);
 }
 
-void ft_close_all(t_lst_cmd *cmd)
+void	ft_close_all(t_lst_cmd *cmd)
 {
 	while (cmd)
 	{

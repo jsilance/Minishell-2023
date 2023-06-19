@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cmd_list.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: avancoll <avancoll@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 16:30:41 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/14 16:42:49 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/06/19 13:20:07 by avancoll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct s_lst_cmd
 	int					fd_out;
 	int					input_type;
 	int					output_type;
+	pid_t				pid;
 }						t_lst_cmd;
 
 t_lst_arg				*ft_list_new(char *content, int len);

@@ -6,21 +6,11 @@
 /*   By: jusilanc <jusilanc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 18:48:21 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/20 01:12:02 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/06/20 01:28:18 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-// static size_t	ft_tab_size(char **tab)
-// {
-// 	size_t	size;
-
-// 	size = 0;
-// 	while (tab && tab[size])
-// 		size++;
-// 	return (size);
-// }
 
 static int	ft_execute(char *cmd, char **all_args, char **env)
 {
@@ -60,7 +50,6 @@ static int	command_selector(t_lst_arg *ptr, char ***env)
 	char	*path_cmd;
 	char	*cmd_str;
 	int		ret;
-	char	**path_find_tmp;
 
 	ret = 0;
 	if (!ptr)
@@ -74,9 +63,7 @@ static int	command_selector(t_lst_arg *ptr, char ***env)
 	else
 	{
 		cmd_str = ft_strndup(ptr->content, ptr->len);
-		path_find_tmp = ft_path_finder(*env);
-		path_cmd = cmd_path(cmd_str, path_find_tmp);
-		// ft_tab_free(path_find_tmp);
+		path_cmd = cmd_path(cmd_str, ft_path_finder(*env));
 		if (!path_cmd)
 		{
 			ft_putstr_fd("minishell: ", 2);
@@ -89,7 +76,6 @@ static int	command_selector(t_lst_arg *ptr, char ***env)
 		else
 			free(path_cmd);
 	}
-	// ft_tab_free(*env);
 	exit(ret);
 }
 

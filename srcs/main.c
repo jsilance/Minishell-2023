@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: avancoll <avancoll@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 16:35:56 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/16 12:05:01 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/06/19 16:37:54 by avancoll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,23 @@ static int	ft_error(int errnum, char *line, t_lst_cmd *cmd, char **env)
 	exit(errnum);
 }
 
+void	shell_level(char **env)
+{
+	int	i;
+	char *temp;
+
+	i = 0;
+	while (env && env[i])
+	{
+		if (!ft_strncmp(env[i], "SHLVL", 5))
+		{
+			temp = ft_strchr(env[i], '=') + 1;
+			env[i] = ft_strjoin("SHLVL=", ft_itoa(ft_atoi(temp) + 1));
+		}
+		i++;
+	}
+}
+
 int	main(int argc, char **argv, char **env)
 {
 	t_base	base_var;
@@ -33,6 +50,7 @@ int	main(int argc, char **argv, char **env)
 	(void)argc;
 	(void)argv;
 	base_var.env_cpy = ft_tabdup(env);
+	shell_level(base_var.env_cpy);
 	while (1)
 	{
 		sig_handler(0);

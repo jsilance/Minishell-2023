@@ -1,9 +1,11 @@
 gestion de toutes les erreures type malloc
 
-gerer les redirection qui se trouvent n'importe ou dans la commande
+(gerer les redirection qui se trouvent n'importe ou dans la commande)
 
 ------------------------------CRASH----------------------------------
 
 
 
 ------------------------------NO CRASH----------------------------------
+cd vers un fichier doit display error
+redirection fail pour l'instant (fd deficient) ---> pipe?

@@ -2,6 +2,7 @@ gestion de toutes les erreures type malloc
 
 /!\ gerer les redirection qui se trouvent n'importe ou dans la commande
 
+/!\ exit ->>>>> gerer argument (valeur de retour)
 
 ------------------------------CRASH----------------------------------
 

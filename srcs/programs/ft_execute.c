@@ -6,7 +6,7 @@
 /*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 18:48:21 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/19 17:07:34 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/06/19 17:16:15 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,21 @@ static void	ft_execute(char *cmd, char **all_args, char **env)
 
 static int	basic_builtin(t_lst_arg *ptr, char ***env)
 {
+	int	ret;
+
+	ret = 0;
 	if (ft_strscmp(ptr->content, "unset"))
 		*env = ft_unset(ptr, *env);
 	else if (ft_strscmp(ptr->content, "export"))
 		*env = ft_export(ptr, *env);
 	else if (ft_strscmp(ptr->content, "cd"))
 		*env = ft_cd(ptr, *env);
+	else if (ft_strscmp(ptr->content, "exit"))
+	{
+		ret = ft_exit(ptr, *env);
+		if (ret != -1)
+			exit((unsigned char)ret);
+	}
 	return (0);
 }
 
@@ -55,8 +64,6 @@ static int	command_selector(t_lst_arg *ptr, char ***env)
 		ft_pwd(ptr, *env);
 	else if (ft_strscmp(ptr->content, "env"))
 		ft_env(*env);
-	else if (ft_strscmp(ptr->content, "exit"))
-		exit(ft_exit(ptr, *env));
 	else
 	{
 		cmd_str = ft_strndup(ptr->content, ptr->len);
@@ -98,6 +105,7 @@ void	ft_cmd_lst_execute(t_lst_cmd *cmd, char ***env)
 	{
 		if (cmd->arguments && (ft_strscmp(cmd->arguments->content, "unset")
 				|| ft_strscmp(cmd->arguments->content, "export")
+				|| ft_strscmp(cmd->arguments->content, "exit")
 				|| ft_strscmp(cmd->arguments->content, "cd")))
 			g_sig_status = basic_builtin(cmd->arguments, env);
 		else

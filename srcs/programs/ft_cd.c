@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jusilanc <jusilanc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 16:20:25 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/15 10:07:41 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/06/20 01:14:25 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,8 @@ char	**ft_cd(t_lst_arg *arg, char **env)
 		if (!temp)
 			return (env);
 		free(tmp_str);
-		env = ft_tab_delone(env, temp);
+		if (ft_tab_finder(env, temp))
+			env = ft_tab_delone(env, temp);
 		env = ft_tab_append(env, temp);
 		if (!getcwd(str, 4096))
 		{

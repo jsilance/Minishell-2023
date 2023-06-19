@@ -3,8 +3,6 @@ gestion de toutes les erreures type malloc
 (gerer les redirection qui se trouvent n'importe ou dans la commande)
 
 ------------------------------CRASH----------------------------------
-.. -> crash raison encore inconue
-cd .. dans le cas special envoyé via slack
 
 
 ------------------------------NO CRASH----------------------------------

@@ -3,30 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   ft_execute.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jusilanc <jusilanc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 18:48:21 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/19 18:50:32 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/06/20 01:12:02 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static size_t	ft_tab_size(char **tab)
-{
-	size_t	size;
+// static size_t	ft_tab_size(char **tab)
+// {
+// 	size_t	size;
 
-	size = 0;
-	while (tab && tab[size])
-		size++;
-	return (size);
-}
+// 	size = 0;
+// 	while (tab && tab[size])
+// 		size++;
+// 	return (size);
+// }
 
-static void	ft_execute(char *cmd, char **all_args, char **env)
+static int	ft_execute(char *cmd, char **all_args, char **env)
 {
 	execve(cmd, all_args, env);
-	perror("execve");
-	ft_multi_free(all_args, ft_tab_size(all_args));
+	perror("minishell");
+	// ft_multi_free(all_args, ft_tab_size(all_args));
+	ft_tab_free(all_args);
+	ft_tab_free(env);
+	return (-1);
 }
 
 static int	basic_builtin(t_lst_arg *ptr, char ***env)
@@ -44,7 +47,10 @@ static int	basic_builtin(t_lst_arg *ptr, char ***env)
 	{
 		ret = ft_exit(ptr, *env);
 		if (ret != -1)
+		{
+			ft_tab_free(*env);
 			exit((unsigned char)ret);
+		}
 	}
 	return (0);
 }
@@ -54,6 +60,7 @@ static int	command_selector(t_lst_arg *ptr, char ***env)
 	char	*path_cmd;
 	char	*cmd_str;
 	int		ret;
+	char	**path_find_tmp;
 
 	ret = 0;
 	if (!ptr)
@@ -67,7 +74,9 @@ static int	command_selector(t_lst_arg *ptr, char ***env)
 	else
 	{
 		cmd_str = ft_strndup(ptr->content, ptr->len);
-		path_cmd = cmd_path(cmd_str, ft_path_finder(*env));
+		path_find_tmp = ft_path_finder(*env);
+		path_cmd = cmd_path(cmd_str, path_find_tmp);
+		// ft_tab_free(path_find_tmp);
 		if (!path_cmd)
 		{
 			ft_putstr_fd("minishell: ", 2);
@@ -75,11 +84,12 @@ static int	command_selector(t_lst_arg *ptr, char ***env)
 			ft_putstr_fd(": command not found\n", 2);
 			ret = 127;
 		}
+		else if (ft_execute(path_cmd, arg_to_tab(ptr, *env), *env) == 0)
+			free(cmd_str);
 		else
-			ft_execute(path_cmd, arg_to_tab(ptr, *env), *env);
-		free(cmd_str);
-		free(path_cmd);
+			free(path_cmd);
 	}
+	// ft_tab_free(*env);
 	exit(ret);
 }
 

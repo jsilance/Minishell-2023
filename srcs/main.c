@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jusilanc <jusilanc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 16:35:56 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/19 18:28:40 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/06/20 00:53:25 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	shell_level(char **env)
 		if (!ft_strncmp(env[i], "SHLVL", 5))
 		{
 			temp = ft_strchr(env[i], '=') + 1;
-			env[i] = ft_strjoin("SHLVL=", ft_itoa(ft_atoi(temp) + 1));
+			env[i] = ft_strnstock("SHLVL=", ft_itoa(ft_atoi(temp) + 1), -1, 2);
 		}
 		i++;
 	}
@@ -49,7 +49,9 @@ int	main(int argc, char **argv, char **env)
 
 	(void)argc;
 	(void)argv;
+	// leaks!? =======================
 	base_var.env_cpy = ft_tabdup(env);
+	// ===============================
 	shell_level(base_var.env_cpy);
 	while (1)
 	{

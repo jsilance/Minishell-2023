@@ -6,13 +6,27 @@
 /*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 16:20:55 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/19 17:05:27 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/06/19 18:08:17 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-unsigned char	ft_exit(t_lst_arg *arg, char **env)
+static int	is_full_digit(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str && str[i])
+	{
+		if (!ft_isdigit(str[i]))
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+int	ft_exit(t_lst_arg *arg, char **env)
 {
 	char *temp;
 	char *str;
@@ -32,14 +46,23 @@ unsigned char	ft_exit(t_lst_arg *arg, char **env)
 		if (!temp)
 			return (-1);
 		free(str);
-		ret = ft_atoi(temp);
-		free(temp);
 		ft_putstr_fd("exit\n", 2);
+		if (!is_full_digit(temp))
+		{
+			ft_putstr_fd("minishell: exit: ", 2);
+			ft_putstr_fd(temp, 2);
+			ft_putstr_fd(": numeric argument required\n", 2);
+			free(temp);
+			return (2);
+		}
 		if (arg->next)
 		{
 			ft_putstr_fd("minishell: exit: too many arguments\n", 2);
+			free(temp);
 			return (-1);
 		}
+		ret = ft_atoi(temp);
+		free(temp);
 	}
 	return (ret);
 }

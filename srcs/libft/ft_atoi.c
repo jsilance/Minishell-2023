@@ -6,11 +6,11 @@
 /*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 16:33:21 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/19 16:34:54 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/06/19 18:00:11 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-static int	ft_isdigit(int c)
+int	ft_isdigit(int c)
 {
 	if (c >= '0' && c <= '9')
 		return (1);

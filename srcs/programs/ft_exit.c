@@ -6,7 +6,7 @@
 /*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 16:20:55 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/19 18:08:17 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/06/19 18:23:31 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ static int	is_full_digit(char *str)
 	i = 0;
 	while (str && str[i])
 	{
-		if (!ft_isdigit(str[i]))
+		if (!ft_isdigit(str[i]) && ((str[i] != '-' || str[i] != '+') && !str[i
+				+ 1]))
 			return (0);
 		i++;
 	}
@@ -53,7 +54,7 @@ int	ft_exit(t_lst_arg *arg, char **env)
 			ft_putstr_fd(temp, 2);
 			ft_putstr_fd(": numeric argument required\n", 2);
 			free(temp);
-			return (2);
+			return (255);
 		}
 		if (arg->next)
 		{

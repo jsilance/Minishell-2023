@@ -6,7 +6,7 @@
 /*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 16:35:56 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/19 17:08:34 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/06/19 18:28:40 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,6 @@ int	main(int argc, char **argv, char **env)
 		if (!ft_strncmp(base_var.line, "./minishell ", 12))
 			sig_handler(2);
 		add_history(base_var.line);
-		// if (base_var.line && !ft_strncmp(base_var.line, "exit", 4))
-		// ft_error(g_sig_status, base_var.line, NULL, base_var.env_cpy);
 		base_var.cmd_lst = ft_parsing(base_var.line, 0, 0, NULL);
 		if (ft_pipe(base_var.cmd_lst) == -1)
 			ft_error(2, base_var.line, base_var.cmd_lst, base_var.env_cpy);
@@ -81,5 +79,3 @@ int	main(int argc, char **argv, char **env)
 	unlink(".tmp");
 	return (0);
 }
-
-// ft_cmd_lst_print(base_var.cmd_lst);

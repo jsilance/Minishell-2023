@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: avancoll <avancoll@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 14:28:48 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/16 15:52:36 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/06/19 13:56:08 by avancoll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,6 +137,8 @@ t_lst_cmd	*ft_parsing(char *line, int i, int len, t_lst_cmd *cmd_lst)
 {
 	t_lst_cmd	*cmd;
 
+	while (line && line[i] && line[i] == ' ')
+		i++;
 	while (line && line[i])
 	{
 		cmd = ft_cmd_list_new(NULL);

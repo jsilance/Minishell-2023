@@ -6,7 +6,7 @@
 /*   By: avancoll <avancoll@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 18:48:21 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/19 13:43:30 by avancoll         ###   ########.fr       */
+/*   Updated: 2023/06/19 13:58:08 by avancoll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,8 +109,7 @@ void	ft_cmd_lst_execute(t_lst_cmd *cmd, char ***env)
 				if (cmd->fd_in)
 					dup2(cmd->fd_in, STDIN_FILENO);
 				ft_close_all(tmp_cmd);
-				if (command_selector(cmd->arguments, env) == -1)
-					ft_putstr_fd("Error:109\n", 2);
+				command_selector(cmd->arguments, env);
 			}
 			else
 			{

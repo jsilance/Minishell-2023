@@ -6,7 +6,7 @@
 /*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 14:28:48 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/16 15:52:36 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/06/19 11:20:09 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,13 +155,17 @@ t_lst_cmd	*ft_parsing(char *line, int i, int len, t_lst_cmd *cmd_lst)
 				i++;
 			while (line[i] && line[i] == ' ')
 				i++;
-			if (ft_strscmp(ft_lst_last(cmd->arguments)->content, "<"))
+			if (line[i] && ft_strscmp(ft_lst_last(cmd->arguments)->content,
+					"<"))
 				cmd->input_type = READ;
-			else if (ft_strscmp(ft_lst_last(cmd->arguments)->content, "<<"))
+			else if (line[i] && ft_strscmp(ft_lst_last(cmd->arguments)->content,
+						"<<"))
 				cmd->input_type = HERE_DOC;
-			else if (ft_strscmp(ft_lst_last(cmd->arguments)->content, ">"))
+			else if (line[i] && ft_strscmp(ft_lst_last(cmd->arguments)->content,
+						">"))
 				cmd->output_type = OVERWRITE;
-			else if (ft_strscmp(ft_lst_last(cmd->arguments)->content, ">>"))
+			else if (line[i] && ft_strscmp(ft_lst_last(cmd->arguments)->content,
+						">>"))
 				cmd->output_type = APPEND;
 			// cmd->input_type = READ;
 		}

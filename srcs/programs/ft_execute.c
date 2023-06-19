@@ -6,7 +6,7 @@
 /*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 18:48:21 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/16 15:10:43 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/06/19 11:46:55 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,9 @@ void	ft_cmd_lst_execute(t_lst_cmd *cmd, char ***env)
 		}
 		cmd = cmd->next;
 	}
+	// waitpid(pid, &status, 0);
+	// if (WIFEXITED(status))
+	// 	g_sig_status = WEXITSTATUS(status);
 	while (tmp_cmd)
 	{
 		waitpid(-1, &status, 0);

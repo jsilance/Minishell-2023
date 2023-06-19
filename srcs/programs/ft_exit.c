@@ -6,7 +6,7 @@
 /*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 16:20:55 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/19 18:23:31 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/06/19 18:56:28 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	ft_exit(t_lst_arg *arg, char **env)
 	char *str;
 	int ret;
 
-	ret = 0;
+	ret = g_sig_status;
 	if (!ft_strscmp(arg->content, "exit"))
 		return (-1);
 	else

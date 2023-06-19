@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_execute.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: avancoll <avancoll@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 18:48:21 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/16 15:10:43 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/06/19 13:43:30 by avancoll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,6 @@ static int	command_selector(t_lst_arg *ptr, char ***env)
 		ft_pwd(ptr, *env);
 	else if (ft_strscmp(ptr->content, "env"))
 		ft_env(*env);
-	// else if (ft_strscmp(ptr->content, "<<"))
-	// 	heredoc(ptr, *env);
 	else
 	{
 		cmd_str = ft_strndup(ptr->content, ptr->len);
@@ -76,9 +74,20 @@ static int	command_selector(t_lst_arg *ptr, char ***env)
 	exit(ret);
 }
 
+void ft_close_all(t_lst_cmd *cmd)
+{
+	while (cmd)
+	{
+		if (cmd->fd_in)
+			close(cmd->fd_in);
+		if (cmd->fd_out != 1)
+			close(cmd->fd_out);
+		cmd = cmd->next;
+	}
+}
+
 void	ft_cmd_lst_execute(t_lst_cmd *cmd, char ***env)
 {
-	pid_t		pid;
 	int			status;
 	t_lst_cmd	*tmp_cmd;
 
@@ -91,20 +100,15 @@ void	ft_cmd_lst_execute(t_lst_cmd *cmd, char ***env)
 			g_sig_status = basic_builtin(cmd->arguments, env);
 		else
 		{
-			pid = fork();
-			if (pid == 0)
+			cmd->pid = fork();
+			if (cmd->pid == 0)
 			{
 				if (cmd->output_type == PIPE || cmd->output_type == APPEND
 					|| cmd->output_type == OVERWRITE)
-				{
 					dup2(cmd->fd_out, STDOUT_FILENO);
-					close(cmd->fd_out);
-				}
 				if (cmd->fd_in)
-				{
 					dup2(cmd->fd_in, STDIN_FILENO);
-					close(cmd->fd_in);
-				}
+				ft_close_all(tmp_cmd);
 				if (command_selector(cmd->arguments, env) == -1)
 					ft_putstr_fd("Error:109\n", 2);
 			}
@@ -120,7 +124,7 @@ void	ft_cmd_lst_execute(t_lst_cmd *cmd, char ***env)
 	}
 	while (tmp_cmd)
 	{
-		waitpid(-1, &status, 0);
+		waitpid(tmp_cmd->pid, &status, 0);
 		if (WIFEXITED(status))
 			g_sig_status = WEXITSTATUS(status);
 		tmp_cmd = tmp_cmd->next;

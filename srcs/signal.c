@@ -6,7 +6,7 @@
 /*   By: avancoll <avancoll@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 16:48:08 by avancoll          #+#    #+#             */
-/*   Updated: 2023/06/13 19:02:50 by avancoll         ###   ########.fr       */
+/*   Updated: 2023/06/19 11:44:12 by avancoll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	restore_prompt(int sig)
 static void	ctrl_c(int sig)
 {
 	g_sig_status = 130;
-	printf("\n");
+	printf("^C\n");
 	(void)sig;
 }
 

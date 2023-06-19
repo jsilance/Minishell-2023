@@ -6,7 +6,7 @@
 /*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 18:48:21 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/19 17:16:15 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/06/19 18:50:32 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ void	ft_cmd_lst_execute(t_lst_cmd *cmd, char ***env)
 				|| ft_strscmp(cmd->arguments->content, "exit")
 				|| ft_strscmp(cmd->arguments->content, "cd")))
 			g_sig_status = basic_builtin(cmd->arguments, env);
-		else
+		else if (cmd->arguments)
 		{
 			cmd->pid = fork();
 			if (cmd->pid == 0)

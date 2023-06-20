@@ -6,7 +6,7 @@
 /*   By: jusilanc <jusilanc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 18:48:21 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/20 01:29:15 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/06/20 11:37:34 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,28 @@ static int	basic_builtin(t_lst_arg *ptr, char ***env)
 	return (0);
 }
 
-static int	command_selector(t_lst_arg *ptr, char ***env)
+static void	command_selector_ext(t_lst_arg *ptr, char ***env, int *ret)
 {
 	char	*path_cmd;
 	char	*cmd_str;
+
+	cmd_str = ft_strndup(ptr->content, ptr->len);
+	path_cmd = cmd_path(cmd_str, ft_path_finder(*env));
+	if (!path_cmd)
+	{
+		ft_putstr_fd("minishell: ", 2);
+		ft_putstr_fd(cmd_str, 2);
+		ft_putstr_fd(": command not found\n", 2);
+		*ret = 127;
+	}
+	else
+		ft_execute(path_cmd, arg_to_tab(ptr, *env), *env);
+	free(cmd_str);
+	free(path_cmd);
+}
+
+static int	command_selector(t_lst_arg *ptr, char ***env)
+{
 	int		ret;
 
 	ret = 0;
@@ -60,21 +78,7 @@ static int	command_selector(t_lst_arg *ptr, char ***env)
 	else if (ft_strscmp(ptr->content, "env"))
 		ft_env(*env);
 	else
-	{
-		cmd_str = ft_strndup(ptr->content, ptr->len);
-		path_cmd = cmd_path(cmd_str, ft_path_finder(*env));
-		if (!path_cmd)
-		{
-			ft_putstr_fd("minishell: ", 2);
-			ft_putstr_fd(cmd_str, 2);
-			ft_putstr_fd(": command not found\n", 2);
-			ret = 127;
-		}
-		else if (ft_execute(path_cmd, arg_to_tab(ptr, *env), *env) == 0)
-			free(cmd_str);
-		else
-			free(path_cmd);
-	}
+		command_selector_ext(ptr, env, &ret);
 	exit(ret);
 }
 

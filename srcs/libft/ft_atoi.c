@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jusilanc <jusilanc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 16:33:21 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/19 18:00:11 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/06/20 11:28:10 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ int	ft_isdigit(int c)
 
 int	ft_atoi(const char *str)
 {
-	long nb;
-	long neg;
+	long	nb;
+	long	neg;
 
 	nb = 0;
 	neg = 1;

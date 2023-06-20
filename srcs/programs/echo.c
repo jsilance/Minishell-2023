@@ -3,14 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jusilanc <jusilanc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 13:39:43 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/13 16:25:29 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/06/20 11:43:50 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static int	free_temp(char *str, char *tmp, int ret)
+{
+	free(str);
+	free(tmp);
+	return (ret);
+}
 
 static int	n_option(char *arg, size_t arg_len, char **env)
 {
@@ -31,9 +38,9 @@ static int	n_option(char *arg, size_t arg_len, char **env)
 			i++;
 		if (ft_strchr("\"'n", str[i - 1] && str[i]))
 			if ((ft_strchr("\"'", str[i])))
-				return (1);
+				return (free_temp(str, tmp, 1));
 	}
-	return (0);
+	return (free_temp(str, tmp, 0));
 }
 
 static void	ft_echo_processing(t_lst_arg *arg, char **env, int *is_first)

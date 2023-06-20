@@ -6,7 +6,7 @@
 /*   By: jusilanc <jusilanc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 16:20:25 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/20 01:14:25 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/06/20 11:16:18 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,18 +43,21 @@ char	**ft_cd(t_lst_arg *arg, char **env)
 		}
 		tmp_str = ft_strnstock("OLDPWD=", str, -1, 0);
 		if (!tmp_str)
+		{
+			perror("minishell");
 			return (env);
+		}
 		temp = ft_strndup(arg->content, arg->len);
 		temp = cd_special_case(temp);
 		dir = ft_str_var_process(temp, env);
 		free(temp);
 		if (!dir)
-		{
 			free(tmp_str);
+		if (!dir)
 			return (env);
-		}
 		if (chdir(dir))
 		{
+			perror("minishell");
 			free(tmp_str);
 			free(dir);
 			return (env);
@@ -75,8 +78,12 @@ char	**ft_cd(t_lst_arg *arg, char **env)
 		}
 		tmp_str = ft_strnstock("PWD=", str, -1, 0);
 		if (!tmp_str)
+			perror("minishell");
+		if (!tmp_str)
 			return (env);
 		temp = ft_str_var_process(tmp_str, env);
+		if (!temp)
+			perror("minishell");
 		if (!temp)
 			return (env);
 		free(tmp_str);

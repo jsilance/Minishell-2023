@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   str_var.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jusilanc <jusilanc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/03 23:28:04 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/15 13:25:46 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/06/20 11:52:02 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ char	*ft_str_var_process(char *arg, char **env)
 
 	ptr = NULL;
 	i = 0;
-	while (arg[i])
+	while (arg && arg[i])
 	{
 		j = 0;
 		if (arg[i] == '~')

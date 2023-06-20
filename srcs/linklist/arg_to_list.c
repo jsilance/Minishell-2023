@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   arg_to_list.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jusilanc <jusilanc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 17:01:47 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/16 14:56:15 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/06/20 11:28:48 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	ft_cmd_lst_print(t_lst_cmd *cmd)
 			ptr = ptr->next;
 		}
 		printf("(%d)(%d)(%d)(%d)\n", cmd->fd_in, cmd->fd_out, cmd->input_type,
-				cmd->output_type);
+			cmd->output_type);
 		cmd = cmd->next;
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_programs.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jusilanc <jusilanc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 13:48:18 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/19 18:03:29 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/06/20 13:20:33 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,12 @@ int		ft_exit(t_lst_arg *arg, char **env);
 
 char	*var_to_str(char *str, char **env, size_t *i);
 char	*ft_str_var_process(char *arg, char **env);
+int		command_selector(t_lst_arg *ptr, char ***env);
+int		basic_builtin(t_lst_arg *ptr, char ***env);
+char	*cd_special_case(char *str);
+
+void	ft_swap(char **a, char **b);
+void	ft_sort_char_tab(char **tab, int size);
+size_t	ft_tab_len(char **tab);
 
 #endif

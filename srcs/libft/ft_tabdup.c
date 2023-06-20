@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_tabdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jusilanc <jusilanc@student.s19.be>         +#+  +:+       +#+        */
+/*   By: avancoll <avancoll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 21:40:35 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/03 22:11:18 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/06/20 16:29:04 by avancoll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,22 @@ static size_t	ft_len_to_compare(const char *str_env, const char *variable)
 	if (str_env_len < variable_len)
 		return (variable_len);
 	return (str_env_len);
+}
+
+char	**ft_tabfree(new_tab)
+{
+	size_t	size;
+
+	size = 0;
+	if (!new_tab)
+		return (NULL);
+	while (new_tab[size])
+	{
+		free(new_tab[size]);
+		size++;
+	}
+	free(new_tab);
+	return (NULL);
 }
 
 char	**ft_tabdup(char **tab)
@@ -41,6 +57,8 @@ char	**ft_tabdup(char **tab)
 	while (tab[size])
 	{
 		new_tab[size] = ft_strdup(tab[size]);
+		if (!new_tab[size])
+			return (ft_tabfree(new_tab));
 		size++;
 	}
 	new_tab[size] = NULL;

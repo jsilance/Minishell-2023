@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: avancoll <avancoll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 14:28:48 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/19 19:23:39 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/06/20 16:15:28 by avancoll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,8 +147,7 @@ t_lst_cmd	*ft_parsing(char *line, int i, int len, t_lst_cmd *cmd_lst)
 			i += len;
 			if (line[i] == '"')
 				i++;
-			while (line[i] && line[i] == ' ')
-				i++;
+			while (line[i] && line[i] == ' ' && ++i);
 			if (line[i] && cmd->arguments
 				&& ft_strscmp(ft_lst_last(cmd->arguments)->content, "<"))
 				cmd->input_type = READ;
@@ -161,12 +160,10 @@ t_lst_cmd	*ft_parsing(char *line, int i, int len, t_lst_cmd *cmd_lst)
 			else if (line[i] && cmd->arguments
 					&& ft_strscmp(ft_lst_last(cmd->arguments)->content, ">>"))
 				cmd->output_type = APPEND;
-			// cmd->input_type = READ;
 		}
 		cmd->output_type = output_type_selector(&line[i]);
 		i += (cmd->output_type == APPEND) + (line[i] != 0);
 		rm_redir_lst(cmd);
 	}
-	// ft_cmd_lst_print(cmd_lst);
 	return (cmd_lst);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jusilanc <jusilanc@student.s19.be>         +#+  +:+       +#+        */
+/*   By: avancoll <avancoll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 16:35:56 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/20 00:53:25 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/06/20 16:42:02 by avancoll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ static int	ft_error(int errnum, char *line, t_lst_cmd *cmd, char **env)
 	if (errnum)
 		perror("minishell");
 	unlink(".tmp");
+	if (errnum == 130)//solution temporaire pas tres propre
+		exit(130);
 	exit(errnum);
 }
 
@@ -52,6 +54,8 @@ int	main(int argc, char **argv, char **env)
 	// leaks!? =======================
 	base_var.env_cpy = ft_tabdup(env);
 	// ===============================
+	if (!base_var.env_cpy)
+		ft_error(1, NULL, NULL, NULL);
 	shell_level(base_var.env_cpy);
 	while (1)
 	{
@@ -61,7 +65,7 @@ int	main(int argc, char **argv, char **env)
 		if (base_var.line == NULL)
 		{
 			printf("exit\n");
-			exit(130);
+			ft_error(130, base_var.line, base_var.cmd_lst, base_var.env_cpy);
 		}
 		if (!ft_strncmp(base_var.line, "./minishell ", 12))
 			sig_handler(2);

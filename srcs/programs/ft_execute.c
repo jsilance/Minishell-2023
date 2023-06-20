@@ -6,7 +6,7 @@
 /*   By: jusilanc <jusilanc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 18:48:21 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/20 01:28:18 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/06/20 01:29:15 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ static int	ft_execute(char *cmd, char **all_args, char **env)
 {
 	execve(cmd, all_args, env);
 	perror("minishell");
-	// ft_multi_free(all_args, ft_tab_size(all_args));
 	ft_tab_free(all_args);
 	ft_tab_free(env);
 	return (-1);

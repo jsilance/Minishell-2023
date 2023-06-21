@@ -6,7 +6,7 @@
 /*   By: avancoll <avancoll@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 16:48:08 by avancoll          #+#    #+#             */
-/*   Updated: 2023/06/19 11:44:12 by avancoll         ###   ########.fr       */
+/*   Updated: 2023/06/21 11:17:40 by avancoll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ static void	ctrl_backslash(int sig)
 	printf("Quit: 3\n");
 	(void)sig;
 }
+
 void	sig_handler(int process)
 {
 	struct termios	term;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   str_var.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jusilanc <jusilanc@student.s19.be>         +#+  +:+       +#+        */
+/*   By: avancoll <avancoll@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/03 23:28:04 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/20 11:52:02 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/06/21 11:17:29 by avancoll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,18 @@ char	*var_to_str(char *str, char **env, size_t *i)
 	return (ptr);
 }
 
+void	home_checker(char *arg, size_t *i, char **ptr, char **env)
+{
+	if (arg[*i] == '~')
+	{
+		if (!arg[(*i) + 1] || (arg[(*i) + 1] && arg[*i + 1] == '/'))
+		{
+			*ptr = ft_strnstock(*ptr, var_to_str("HOME", env, i), -1, 3);
+			*i -= 3;
+		}
+	}
+}
+
 char	*ft_str_var_process(char *arg, char **env)
 {
 	char	*ptr;
@@ -85,14 +97,7 @@ char	*ft_str_var_process(char *arg, char **env)
 	while (arg && arg[i])
 	{
 		j = 0;
-		if (arg[i] == '~')
-		{
-			if (!arg[i + 1] || (arg[i + 1] && arg[i + 1] == '/'))
-			{
-				ptr = ft_strnstock(ptr, var_to_str("HOME", env, &i), -1, 3);
-				i -= 3;
-			}
-		}
+		home_checker(arg, &i, &ptr, env);
 		if (arg[i] && !ft_strchr("'\"$", arg[i]))
 		{
 			while (arg[i + j] && !ft_strchr("'\"$", arg[i + j]))

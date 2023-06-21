@@ -6,7 +6,7 @@
 /*   By: avancoll <avancoll@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 16:35:56 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/21 11:01:09 by avancoll         ###   ########.fr       */
+/*   Updated: 2023/06/21 11:31:44 by avancoll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,11 @@ static int	ft_error(int errnum, char *line, t_lst_cmd *cmd, char **env)
 	if (cmd)
 		ft_cmd_lst_clear(cmd);
 	unlink(".tmp");
-	if (errnum == 130)//solution temporaire pas tres propre
+	if (errnum == 130)
+	{
+		printf("exit\n");
 		exit(130);
+	}
 	if (errnum)
 		perror("minishell");
 	exit(errnum);
@@ -45,6 +48,21 @@ void	shell_level(char **env)
 	}
 }
 
+void	free_loop(t_base base_var)
+{
+	unlink(".tmp");
+	ft_cmd_lst_clear(base_var.cmd_lst);
+	free(base_var.line);
+}
+
+void	pipe_creator(t_base base_var)
+{
+	if (ft_pipe(base_var.cmd_lst) == -1)
+		ft_error(2, base_var.line, base_var.cmd_lst, base_var.env_cpy);
+	if (!base_var.env_cpy)
+		ft_error(3, base_var.line, base_var.cmd_lst, base_var.env_cpy);
+}
+
 int	main(int argc, char **argv, char **env)
 {
 	t_base	base_var;
@@ -61,25 +79,15 @@ int	main(int argc, char **argv, char **env)
 		base_var.line = readline("minishell$ ");
 		sig_handler(1);
 		if (base_var.line == NULL)
-		{
-			printf("exit\n");
 			ft_error(130, NULL, NULL, base_var.env_cpy);
-		}
 		if (!ft_strncmp(base_var.line, "./minishell ", 12))
 			sig_handler(2);
 		add_history(base_var.line);
 		base_var.cmd_lst = ft_parsing(base_var.line, 0, 0, NULL);
-		if (ft_pipe(base_var.cmd_lst) == -1)
-			ft_error(2, base_var.line, base_var.cmd_lst, base_var.env_cpy);
-		if (!base_var.env_cpy)
-			ft_error(3, base_var.line, base_var.cmd_lst, base_var.env_cpy);
+		pipe_creator(base_var);
 		ft_cmd_lst_execute(base_var.cmd_lst, &base_var.env_cpy);
-		unlink(".tmp");
-		ft_cmd_lst_clear(base_var.cmd_lst);
-		free(base_var.line);
-		base_var.line = NULL;
+		free_loop(base_var);
 	}
 	ft_tab_free(base_var.env_cpy);
-	unlink(".tmp");
-	return (0);
+	return (1);
 }

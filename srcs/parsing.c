@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: avancoll <avancoll@student.42.fr>          +#+  +:+       +#+        */
+/*   By: avancoll <avancoll@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 14:28:48 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/20 16:15:28 by avancoll         ###   ########.fr       */
+/*   Updated: 2023/06/21 11:18:35 by avancoll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,18 +147,19 @@ t_lst_cmd	*ft_parsing(char *line, int i, int len, t_lst_cmd *cmd_lst)
 			i += len;
 			if (line[i] == '"')
 				i++;
-			while (line[i] && line[i] == ' ' && ++i);
+			while (line[i] && line[i] == ' ')
+				i++;
 			if (line[i] && cmd->arguments
 				&& ft_strscmp(ft_lst_last(cmd->arguments)->content, "<"))
 				cmd->input_type = READ;
 			else if (line[i] && cmd->arguments
-					&& ft_strscmp(ft_lst_last(cmd->arguments)->content, "<<"))
+				&& ft_strscmp(ft_lst_last(cmd->arguments)->content, "<<"))
 				cmd->input_type = HERE_DOC;
 			else if (line[i] && cmd->arguments
-					&& ft_strscmp(ft_lst_last(cmd->arguments)->content, ">"))
+				&& ft_strscmp(ft_lst_last(cmd->arguments)->content, ">"))
 				cmd->output_type = OVERWRITE;
 			else if (line[i] && cmd->arguments
-					&& ft_strscmp(ft_lst_last(cmd->arguments)->content, ">>"))
+				&& ft_strscmp(ft_lst_last(cmd->arguments)->content, ">>"))
 				cmd->output_type = APPEND;
 		}
 		cmd->output_type = output_type_selector(&line[i]);

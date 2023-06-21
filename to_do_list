@@ -8,3 +8,9 @@ gestion de toutes les erreures type malloc
 ------------------------------NO CRASH----------------------------------
 redirection fail pour l'instant (fd deficient) ---> pipe?
 /!\ gros leak dans le main
+
+SHLVL qd modifie avant (overflow, lettres, nbr negatifs)
+exit dans les pipes doit pas quitter
+export doit etre invalide quand chiffre au debut ou quand carateres speciaux sauf _
+valeur de exit avec lettres doit etre 2, tout rechecker au cas ou
+proteger les fork, pipe, dup2

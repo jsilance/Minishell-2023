@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_execute_ext.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jusilanc <jusilanc@student.s19.be>         +#+  +:+       +#+        */
+/*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 12:18:17 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/20 12:18:52 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/06/21 13:09:15 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ void	ft_cmd_lst_execute(t_lst_cmd *cmd, char ***env)
 	tmp_cmd = cmd;
 	while (cmd)
 	{
+		// ft_cmd_lst_print(cmd);
 		if (cmd->arguments && (ft_strscmp(cmd->arguments->content, "unset")
 				|| ft_strscmp(cmd->arguments->content, "export")
 				|| ft_strscmp(cmd->arguments->content, "exit")

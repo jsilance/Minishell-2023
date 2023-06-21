@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: avancoll <avancoll@student.s19.be>         +#+  +:+       +#+        */
+/*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 14:28:48 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/21 11:18:35 by avancoll         ###   ########.fr       */
+/*   Updated: 2023/06/21 13:51:27 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,18 +70,22 @@ static void	rm_redir_lst(t_lst_cmd *cmd)
 	t_lst_arg	*arg;
 	t_lst_arg	*arg_prev;
 	char		*tmp;
+	size_t		len;
+	size_t		i;
 
 	arg_prev = NULL;
 	while (cmd)
 	{
+		i = 0;
 		arg = cmd->arguments;
-		while (arg)
+		len = ft_lst_size(arg);
+		while (arg && i++ < len)
 		{
-			while (output_type_selector(arg->content) != -1)
+			while (arg && output_type_selector(arg->content) != -1)
 			{
 				cmd->output_type = output_type_selector(arg->content);
 				arg = arg->next;
-				if (cmd->input_type == READ)
+				if (arg && cmd->input_type == READ)
 				{
 					tmp = ft_strndup(arg->content, arg->len);
 					cmd->fd_in = open(tmp, O_RDONLY);
@@ -89,37 +93,43 @@ static void	rm_redir_lst(t_lst_cmd *cmd)
 						perror("minishell");
 					free(tmp);
 				}
-				else if (cmd->output_type == OVERWRITE)
+				else if (arg && cmd->output_type == OVERWRITE)
 				{
 					tmp = ft_strndup(arg->content, arg->len);
+					if (cmd->fd_out != 1)
+						close(cmd->fd_out);
 					cmd->fd_out = open(tmp, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 					if (cmd->fd_out == -1)
 						perror("minishell");
 					free(tmp);
 				}
-				else if (cmd->output_type == APPEND)
+				else if (arg && cmd->output_type == APPEND)
 				{
 					tmp = ft_strndup(arg->content, arg->len);
+					if (cmd->fd_out != 1)
+						close(cmd->fd_out);
 					cmd->fd_out = open(tmp, O_WRONLY | O_CREAT | O_APPEND,
 							0644);
 					if (cmd->fd_out == -1)
 						perror("minishell");
 					free(tmp);
 				}
-				else if (cmd->output_type == HERE_DOC)
+				else if (arg && cmd->output_type == HERE_DOC)
 				{
 					heredoc(arg, NULL);
 					cmd->fd_in = open(".tmp", O_RDONLY);
 					if (cmd->fd_in == -1)
 						perror("minishell");
 				}
-				if (arg_prev)
+				if (arg && arg_prev)
 					arg_prev->next = arg->next;
-				else
+				else if (arg)
 					cmd->arguments = arg->next;
 			}
-			arg_prev = arg;
-			arg = arg->next;
+			if (arg)
+				arg_prev = arg;
+			if (arg)
+				arg = arg->next;
 		}
 		cmd = cmd->next;
 	}
@@ -153,18 +163,17 @@ t_lst_cmd	*ft_parsing(char *line, int i, int len, t_lst_cmd *cmd_lst)
 				&& ft_strscmp(ft_lst_last(cmd->arguments)->content, "<"))
 				cmd->input_type = READ;
 			else if (line[i] && cmd->arguments
-				&& ft_strscmp(ft_lst_last(cmd->arguments)->content, "<<"))
+					&& ft_strscmp(ft_lst_last(cmd->arguments)->content, "<<"))
 				cmd->input_type = HERE_DOC;
 			else if (line[i] && cmd->arguments
-				&& ft_strscmp(ft_lst_last(cmd->arguments)->content, ">"))
+					&& ft_strscmp(ft_lst_last(cmd->arguments)->content, ">"))
 				cmd->output_type = OVERWRITE;
 			else if (line[i] && cmd->arguments
-				&& ft_strscmp(ft_lst_last(cmd->arguments)->content, ">>"))
+					&& ft_strscmp(ft_lst_last(cmd->arguments)->content, ">>"))
 				cmd->output_type = APPEND;
+			rm_redir_lst(cmd);
 		}
-		cmd->output_type = output_type_selector(&line[i]);
 		i += (cmd->output_type == APPEND) + (line[i] != 0);
-		rm_redir_lst(cmd);
 	}
 	return (cmd_lst);
 }

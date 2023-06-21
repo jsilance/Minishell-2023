@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_tabdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: avancoll <avancoll@student.42.fr>          +#+  +:+       +#+        */
+/*   By: avancoll <avancoll@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 21:40:35 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/20 16:29:04 by avancoll         ###   ########.fr       */
+/*   Updated: 2023/06/21 10:48:35 by avancoll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static size_t	ft_len_to_compare(const char *str_env, const char *variable)
 	return (str_env_len);
 }
 
-char	**ft_tabfree(new_tab)
+char	**ft_tabfree(char **new_tab)
 {
 	size_t	size;
 

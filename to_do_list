@@ -1,7 +1,5 @@
 gestion de toutes les erreures type malloc
 
-(gerer les redirection qui se trouvent n'importe ou dans la commande)
-
 ------------------------------CRASH----------------------------------
 
 
@@ -14,3 +12,5 @@ exit dans les pipes doit pas quitter
 export doit etre invalide quand chiffre au debut ou quand carateres speciaux sauf _
 valeur de exit avec lettres doit etre 2, tout rechecker au cas ou
 proteger les fork, pipe, dup2
+
+gerer overflow de exit

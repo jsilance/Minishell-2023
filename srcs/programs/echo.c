@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jusilanc <jusilanc@student.s19.be>         +#+  +:+       +#+        */
+/*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 13:39:43 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/20 11:43:50 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/06/21 16:46:15 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 static int	free_temp(char *str, char *tmp, int ret)
 {
 	free(str);
-	free(tmp);
+	if (tmp != str)
+		free(tmp);
 	return (ret);
 }
 

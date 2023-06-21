@@ -4,6 +4,5 @@
 ------------------------------NO CRASH----------------------------------
 
 (exit dans les pipes doit pas quitter)
-proteger les fork, pipe, dup2
 
 (gerer overflow de exit)

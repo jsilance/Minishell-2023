@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_execute_ext.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: avancoll <avancoll@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 12:18:17 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/21 14:45:43 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/06/21 16:22:50 by avancoll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,11 @@ static void	child_process(t_lst_cmd *cmd, t_lst_cmd *tmp_cmd, char ***env)
 {
 	if (cmd->output_type == PIPE || cmd->output_type == APPEND
 		|| cmd->output_type == OVERWRITE)
-		dup2(cmd->fd_out, STDOUT_FILENO);
+		if (dup2(cmd->fd_out, STDOUT_FILENO) == -1)
+			perror("minishell");
 	if (cmd->fd_in)
-		dup2(cmd->fd_in, STDIN_FILENO);
+		if (dup2(cmd->fd_in, STDIN_FILENO) == -1)
+			perror("minishell");
 	ft_close_all(tmp_cmd);
 	command_selector(cmd->arguments, env);
 }
@@ -71,6 +73,8 @@ void	ft_cmd_lst_execute(t_lst_cmd *cmd, char ***env)
 		else if (cmd->arguments)
 		{
 			cmd->pid = fork();
+			if (cmd->pid == -1)
+				perror("minishell");
 			if (cmd->pid == 0)
 				child_process(cmd, tmp_cmd, env);
 			else

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_programs.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jusilanc <jusilanc@student.s19.be>         +#+  +:+       +#+        */
+/*   By: avancoll <avancoll@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 13:48:18 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/20 13:20:33 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/06/21 11:38:31 by avancoll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int		ft_exit(t_lst_arg *arg, char **env);
 
 char	*var_to_str(char *str, char **env, size_t *i);
 char	*ft_str_var_process(char *arg, char **env);
+void	home_checker(char *arg, size_t *i, char **ptr, char **env);
 int		command_selector(t_lst_arg *ptr, char ***env);
 int		basic_builtin(t_lst_arg *ptr, char ***env);
 char	*cd_special_case(char *str);

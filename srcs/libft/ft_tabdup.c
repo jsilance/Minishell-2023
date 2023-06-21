@@ -6,7 +6,7 @@
 /*   By: avancoll <avancoll@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 21:40:35 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/21 10:48:35 by avancoll         ###   ########.fr       */
+/*   Updated: 2023/06/21 11:34:51 by avancoll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,22 +22,6 @@ static size_t	ft_len_to_compare(const char *str_env, const char *variable)
 	if (str_env_len < variable_len)
 		return (variable_len);
 	return (str_env_len);
-}
-
-char	**ft_tabfree(char **new_tab)
-{
-	size_t	size;
-
-	size = 0;
-	if (!new_tab)
-		return (NULL);
-	while (new_tab[size])
-	{
-		free(new_tab[size]);
-		size++;
-	}
-	free(new_tab);
-	return (NULL);
 }
 
 char	**ft_tabdup(char **tab)

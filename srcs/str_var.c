@@ -6,7 +6,7 @@
 /*   By: avancoll <avancoll@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/03 23:28:04 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/21 11:17:29 by avancoll         ###   ########.fr       */
+/*   Updated: 2023/06/21 11:36:13 by avancoll         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,18 +72,6 @@ char	*var_to_str(char *str, char **env, size_t *i)
 	free(temp);
 	(*i) += j;
 	return (ptr);
-}
-
-void	home_checker(char *arg, size_t *i, char **ptr, char **env)
-{
-	if (arg[*i] == '~')
-	{
-		if (!arg[(*i) + 1] || (arg[(*i) + 1] && arg[*i + 1] == '/'))
-		{
-			*ptr = ft_strnstock(*ptr, var_to_str("HOME", env, i), -1, 3);
-			*i -= 3;
-		}
-	}
 }
 
 char	*ft_str_var_process(char *arg, char **env)

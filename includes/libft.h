@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: avancoll <avancoll@student.s19.be>         +#+  +:+       +#+        */
+/*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 20:22:58 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/21 11:37:16 by avancoll         ###   ########.fr       */
+/*   Updated: 2023/06/21 16:05:50 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,7 @@ void	ft_putstr_fd(char *s, int fd);
 int		ft_atoi(const char *str);
 int		ft_isdigit(int c);
 char	**ft_tabfree(char **new_tab);
+
+int		ft_is_good_char(char *str, int len);
 
 #endif

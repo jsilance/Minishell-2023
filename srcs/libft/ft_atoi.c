@@ -3,12 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jusilanc <jusilanc@student.s19.be>         +#+  +:+       +#+        */
+/*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 16:33:21 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/20 11:28:10 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/06/21 16:09:48 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+int	ft_is_good_char(char *str, int len)
+{
+	int	i;
+
+	i = 0;
+	while (str && str[i] && str[i] != '=' && (len == -1 || i < len))
+	{
+		if ((str[i] < '0' || str[i] > '9') && (str[i] < 'a' || str[i] > 'z')
+			&& (str[i] < 'A' || str[i] > 'Z') && str[i] != '_')
+			return (0);
+		i++;
+	}
+	return (1);
+}
 
 int	ft_isdigit(int c)
 {

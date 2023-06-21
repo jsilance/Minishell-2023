@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jusilanc <jusilanc@student.s19.be>         +#+  +:+       +#+        */
+/*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 15:13:27 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/20 13:23:37 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/06/21 16:08:40 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	is_var_exist(char **env, const char *var)
+int	is_var_exist(char **env, const char *var)
 {
 	char	**tab;
 	int		ret;
@@ -25,6 +25,13 @@ static int	is_var_exist(char **env, const char *var)
 	return (ret);
 }
 
+static void	error_not_char(char *str)
+{
+	ft_putstr_fd("minishell: export: `", 2);
+	ft_putstr_fd(str, 2);
+	ft_putstr_fd("': not a valid identifier\n", 2);
+}
+
 static char	**exporting_part(t_lst_arg *arg, char **env)
 {
 	char	*str;
@@ -32,7 +39,10 @@ static char	**exporting_part(t_lst_arg *arg, char **env)
 
 	while (arg)
 	{
-		if (ft_strnchr(arg->content, '=', arg->len))
+		if (ft_isdigit(arg->content[0]) || ft_strchr(" ", arg->content[0])
+			|| !ft_is_good_char(arg->content, arg->len))
+			error_not_char(arg->content);
+		else if (ft_strnchr(arg->content, '=', arg->len))
 		{
 			str = ft_strndup(arg->content, arg->len);
 			if (!str)

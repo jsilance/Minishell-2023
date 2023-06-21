@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: avancoll <avancoll@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 16:35:56 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/21 15:35:56 by avancoll         ###   ########.fr       */
+/*   Updated: 2023/06/21 15:46:49 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,23 @@ void	shell_level(char **env)
 {
 	int		i;
 	char	*temp;
+	char	*old_var;
+	long	shlvl;
 
 	i = 0;
 	while (env && env[i])
 	{
 		if (!ft_strncmp(env[i], "SHLVL", 5))
 		{
+			old_var = env[i];
 			temp = ft_strchr(env[i], '=') + 1;
-			free(env[i]);
-			env[i] = ft_strnstock("SHLVL=", ft_itoa(ft_atoi(temp) + 1), -1, 2);
+			shlvl = ft_atoi(temp);
+			if (shlvl < 0)
+				shlvl = 0;
+			else
+				shlvl++;
+			env[i] = ft_strnstock("SHLVL=", ft_itoa(shlvl), -1, 2);
+			free(old_var);
 		}
 		i++;
 	}

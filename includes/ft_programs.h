@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_programs.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: avancoll <avancoll@student.s19.be>         +#+  +:+       +#+        */
+/*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 13:48:18 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/21 11:38:31 by avancoll         ###   ########.fr       */
+/*   Updated: 2023/06/21 15:41:08 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,6 @@ char	*cd_special_case(char *str);
 void	ft_swap(char **a, char **b);
 void	ft_sort_char_tab(char **tab, int size);
 size_t	ft_tab_len(char **tab);
+int		is_var_exist(char **env, const char *var);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   str_var.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jusilanc <jusilanc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/03 23:28:04 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/21 12:25:31 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/06/22 00:38:57 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void	single_quote(char *arg, size_t *i, char **ptr)
 	while (arg[(*i) + j] && arg[(*i) + j] != '\'')
 		j++;
 	*ptr = ft_strnstock(*ptr, ft_substr(arg, *i, j), -1, 3);
-	if (arg[*i] == '\'')
+	if (arg[*i + j] == '\'')
 		j++;
 	(*i) += j;
 }

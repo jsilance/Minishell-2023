@@ -1,21 +1,10 @@
 ------------------------------CRASH----------------------------------
 (exit dans les pipes doit pas quitter)
 (gerer overflow de exit)
---------------------------------------------------------------------------------
-cat >> test ne fonctionne plus probleme:
-==4281==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x60200000297c at pc 0x00010038539d bp 0x7ffeef87f2f0 sp 0x7ffeef87f2e8
-READ of size 1 at 0x60200000297c thread T0
-    #0 0x10038539c in ft_parsing parsing.c:98
-    #1 0x100382c3a in main main.c:95
-    #2 0x7fff71cf2cc8 in start+0x0 (libdyld.dylib:x86_64+0x1acc8)
---------------------------------------------------------------------------------
-simple et double quotes ont un petit soucis d'interpretation
-minishell$ echo 'yo'$USER''
-yo$USER
-Dans cet exemple, yo est entre deux '' puis $USER doit etre traduit et puis quotes vides
-Mais dans notre cas $USER n'est pas traduit
---------------------------------------------------------------------------------
-export $ARG="echo salut" n'exec pas la commande echo pour afficher salut
---------------------------------------------------------------------------------
 
+/!\ # supprimer cmd_lst_print du push final
+
+--------------------------------------------------------------------------------
+(export $ARG="echo salut" n'exec pas la commande echo pour afficher salut) -> ? (marche pas dans mon bash)
+--------------------------------------------------------------------------------
 

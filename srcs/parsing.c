@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jusilanc <jusilanc@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 14:28:48 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/21 15:22:56 by jusilanc         ###   ########.fr       */
+/*   Updated: 2023/06/21 22:43:54 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ t_lst_cmd	*ft_parsing(char *line, int i, int len, t_lst_cmd *cmd_lst)
 		}
 		if (line[i] == '|')
 			cmd->output_type = output_type_selector(&line[i]);
-		i += (cmd->output_type == APPEND) + (line[i] != 0);
+		i += (line[i] && cmd->output_type == APPEND) + (line[i] != 0);
 	}
 	return (cmd_lst);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   str_var.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: avancoll <avancoll@student.s19.be>         +#+  +:+       +#+        */
+/*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/03 23:28:04 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/21 11:36:13 by avancoll         ###   ########.fr       */
+/*   Updated: 2023/06/21 12:25:31 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void	double_quote(char *arg, size_t *i, char **ptr, char **env)
 		else
 			*ptr = ft_strnstock(*ptr, ft_substr(arg, (*i)++, 1), -1, 3);
 	}
-	if (arg[*i] == '"') // was '\'' before
+	if (arg[*i] == '"')
 		(*i)++;
 }
 

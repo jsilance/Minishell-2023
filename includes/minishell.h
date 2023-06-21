@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: avancoll <avancoll@student.s19.be>         +#+  +:+       +#+        */
+/*   By: jusilanc <jusilanc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 16:36:33 by jusilanc          #+#    #+#             */
-/*   Updated: 2023/06/15 13:47:56 by avancoll         ###   ########.fr       */
+/*   Updated: 2023/06/21 15:15:31 by jusilanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,9 @@ int				ft_pipe(t_lst_cmd *cmd);
 void			sig_handler(int process);
 void			rl_replace_line(const char *text, int clear_undo);
 void			heredoc(t_lst_arg *ptr, char **env);
+
+int				output_type_selector(char *line);
+void			parsing_main_part(t_lst_arg **arg, t_lst_cmd **cmd,
+					t_lst_arg **arg_prev);
 
 #endif

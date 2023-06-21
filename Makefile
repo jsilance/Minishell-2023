@@ -16,15 +16,16 @@ NAME = minishell
 
 # ======SOURCES======
 
-SRCS = main.c path_finder.c parsing.c ft_pipe.c str_var.c str_var_utils.c signal.c heredoc.c\
+SRCS =	main.c path_finder.c parsing.c ft_pipe.c str_var.c str_var_utils.c signal.c heredoc.c \
+		parsing_utils.c \
 
-LIBFT = ft_strchr.c ft_strnstr.c ft_memcpy.c ft_strdup.c ft_strlen.c ft_strtrim.c ft_substr.c \
+LIBFT =	ft_strchr.c ft_strnstr.c ft_memcpy.c ft_strdup.c ft_strlen.c ft_strtrim.c ft_substr.c \
 		ft_split.c ft_strjoin.c ft_strncmp.c ft_tabdup.c ft_tabdup_utils.c ft_len_until_equal.c \
 		ft_itoa.c ft_putstr_fd.c ft_atoi.c \
 
-LLIST = arg_to_list.c arg_list_utils.c cmd_list_utils.c arg_to_tab.c \
+LLIST =	arg_to_list.c arg_list_utils.c cmd_list_utils.c arg_to_tab.c \
 
-BASE_PROG = ft_execute.c echo.c ft_unset.c ft_export.c ft_env.c ft_cd.c ft_pwd.c ft_exit.c \
+BASE_PROG =	ft_execute.c echo.c ft_unset.c ft_export.c ft_env.c ft_cd.c ft_pwd.c ft_exit.c \
 			ft_execute_ext.c ft_cd_ext.c ft_export_ext.c \
 
 # ======ADD PREFIX======
